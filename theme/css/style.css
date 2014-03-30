@@ -66,6 +66,11 @@ a:link, a:visited, a:hover, a:active {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
   font-family: 'Montserrat', sans-serif;
+}
+
+.article-body h1, h2, h3, h4, h5, h6 {
+  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
   border-bottom: 1px solid #90cc67;
 }
 

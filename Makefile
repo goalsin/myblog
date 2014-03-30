@@ -38,6 +38,6 @@ regenerate:
 publish:
 	if test -d $(BASEDIR)/extra; then cp $(BASEDIR)/extra/* $(OUTPUTDIR)/; fi
 	@ghp-import output -p -n
-	@ghp-import output -b gitcafe-pages -r gitcafe -p
+	@ghp-import output -b gh-pages -r origin -p
 
 .PHONY: html help clean regenerate

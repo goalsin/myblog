@@ -62,14 +62,26 @@ a:link, a:visited, a:hover, a:active {
 .l-cover .social-links li:last-child::after {
   display: none;
 }
-
+/**
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
   font-family: 'Montserrat', sans-serif;
 }
 
+.markdown-body h1, h2, h3, h4, h5, h6 {
+  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
+  border-bottom: 1px solid #90cc67;
+}
+
 h1 {
   font-size: 2em;
+}
+
+*/
+
+.article-title h2{
+  border-bottom: 1px solid #90cc67;
 }
 
 .hr {

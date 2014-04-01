@@ -41,7 +41,7 @@ ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}/index.html'
 SUMMARY_END_MARKER = '<!-- more -->'
 SUMMARY_MAX_LENGTH = None
 
-ARTICLE_EXCLUDES = ('pages', 'novel')
+ARTICLE_EXCLUDES = ('pages', 'novel','poem','thought')
 
 DISQUS_SITENAME = 'i5ting'
 

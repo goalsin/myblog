@@ -1,7 +1,6 @@
 Title: PHP 实现单例模式
 Tags: design pattern, php, singleton
 
-# 单例模式
 目前的一个项目有几个模块需要实现单例模式，于是想实现一个 Singleton 基类来使这些模块通过继承该基类实现 Singleton。
 
 <!-- more -->

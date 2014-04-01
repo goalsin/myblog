@@ -1,109 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alfred Sang</title><link href="http://i5ting.com/" rel="alternate"></link><link href="http://i5ting.com/feeds/all.atom.xml" rel="self"></link><id>http://i5ting.com/</id><updated>2011-07-07T00:00:00+02:00</updated><entry><title>实现 vertical-align 的几种办法</title><link href="http://i5ting.com/2011/07/implement-vertical-align/" rel="alternate"></link><updated>2011-07-07T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-07-07:2011/07/implement-vertical-align/</id><summary type="html">&lt;p&gt;一个简单的例子：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;vertical-align: middle; height: 100px;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;span&amp;gt;&lt;/span&gt;hello world!&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alfred Sang</title><link href="http://i5ting.com/" rel="alternate"></link><link href="http://i5ting.com/feeds/all.atom.xml" rel="self"></link><id>http://i5ting.com/</id><updated>2012-02-27T00:00:00+01:00</updated><entry><title>Code Sign error</title><link href="http://i5ting.com/2012/02/codesigin/" rel="alternate"></link><updated>2012-02-27T00:00:00+01:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2012-02-27:2012/02/codesigin/</id><summary type="html">&lt;p&gt;更新证书错误Code Sign error: Provisioning profile ‘XXXX'can't be found
+2012-02-27 17:03 (分类:默认分类)
+在Xcode中当你在更新了你得证书而再重新编译你的程序，真机调试一直会出现 Code Sign error: Provisioning profile ‘XXXX’ can't be found是不是会另你很恼火。下面说说解决方法，让你很好的解决这个问题。&lt;/p&gt;
+&lt;p&gt;1.关闭你的项目，找到项目文件XXXX.xcodeproj，在文件上点击右键，选择“显示包内容”（Show Package Contents）。会新打开一个Finder。注：其实XXXX.xcodeproj就是一个文件夹，这里新打开的一个Finder里面的三个文件就是该XXXX.xcodeproj文件夹里面的文件。 &lt;/p&gt;
+&lt;p&gt;2.在新打开的Finder中找到project.pbxproj，并且打开。在这之中找到你之前的证书的编码信息。我之前报的错误信息是Code Sign error: Provisioning profile '37D44E7F-0339-4277-9A82-C146A944CD46'，所以我用查找的方式找到了所有包括37D44E7F-0339-4277-9A82-C146A944CD46的行，并且删除。 &lt;/p&gt;
+&lt;p&gt;3.保存，重新启动你的项目，再编译。就OK了。   &lt;/p&gt;
+&lt;p&gt;此问题，真恶心&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>iscroll－V3.7.2发布</title><link href="http://i5ting.com/2011/09/iscroll/" rel="alternate"></link><updated>2011-09-23T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-23:2011/09/iscroll/</id><summary type="html">&lt;p&gt;2011-09-23 09:20 (分类:默认分类)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cm"&gt;/**&lt;/span&gt;
+&lt;span class="cm"&gt;* &lt;/span&gt;
+&lt;span class="cm"&gt;* Find more about the scrolling function at&lt;/span&gt;
+&lt;span class="cm"&gt;* http://cubiq.org/iscroll&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* Copyright (c) 2010 Matteo Spinelli, http://cubiq.org/&lt;/span&gt;
+&lt;span class="cm"&gt;* Released under MIT license&lt;/span&gt;
+&lt;span class="cm"&gt;* http://cubiq.org/dropbox/mit-license.txt&lt;/span&gt;
+&lt;span class="cm"&gt;* &lt;/span&gt;
+&lt;span class="cm"&gt;* Version 3.7.1 - Last updated: 2010.10.08&lt;/span&gt;
+&lt;span class="cm"&gt;* &lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;可以看到“hello world!”并没有垂直居中。网上有很多人从很多不同地方面进行分析，其实简单概括就一句话：
-&lt;code&gt;vertical-align&lt;/code&gt;的作用范围仅限&lt;code&gt;display: table-cell&lt;/code&gt;或&lt;code&gt;display: inline-block&lt;/code&gt;元素。&lt;/p&gt;
-&lt;p&gt;那么如何实现垂直居中呢？&lt;/p&gt;
-
-
-&lt;p&gt;最简单的方法，当父容器的高已知时，可以简单地设定要局中的元素的&lt;code&gt;line-height&lt;/code&gt;为父容器的高度即可实现垂直局中。如：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;vertical-align: middle; height: 100px;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;line-height: 100px;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;hello world!&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cm"&gt;/**&lt;/span&gt;
+&lt;span class="cm"&gt;* iScroll3是（../jslib/iscroll3.7.1.js）版本的改造，把iScroll类名改为iScroll3&lt;/span&gt;
+&lt;span class="cm"&gt;* &lt;/span&gt;
+&lt;span class="cm"&gt;* i3 vs i4 difference:&lt;/span&gt;
+&lt;span class="cm"&gt;* 1. i3没有放大（zoom）事件，所以嵌入内部不会产生事件冒泡问题&lt;/span&gt;
+&lt;span class="cm"&gt;* 2. i3和i4完全不一样的api,i4功能更强健一些&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* @modified by alfred.sang@androtimes.com&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* 增加2个全局变量&lt;/span&gt;
+&lt;span class="cm"&gt;*   1）  currentXPage:1,&lt;/span&gt;
+&lt;span class="cm"&gt;*   2）  _isPageFliped:false,//私有    &lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* 增加1个配置项&lt;/span&gt;
+&lt;span class="cm"&gt;*   1）  isFullScreen:true,&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* 增加一个回调函数&lt;/span&gt;
+&lt;span class="cm"&gt;*   1）  onScrollXPageFliped:function(){},//翻页事件处理回调函数&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;* that.wrapper.offsetWidth是父容器的宽度。计算currentXPage&lt;/span&gt;
+&lt;span class="cm"&gt;* &lt;/span&gt;
+&lt;span class="cm"&gt;* Version 3.7.2 - Last updated: 2011.9.22&lt;/span&gt;
+&lt;span class="cm"&gt;*&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;   
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;第二个方法，当父容器高度未知，子元素高度已知时，可以依次这样做：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;设置父容器&lt;code&gt;position:relative&lt;/code&gt;或&lt;code&gt;position:absolute&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;设置子元素&lt;code&gt;position:absolute&lt;/code&gt;且&lt;code&gt;top:50%&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;设置子元素&lt;code&gt;margin-top: -子元素高度的二分之一&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;喜欢简单的方式？&lt;/h2&gt;
-&lt;p&gt;喜欢简单的人们可以使用下面的javascript代码(需要jQuery)，原理是在要垂直局中的元素外包一层:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-  &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.vertical-align-middle&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;wrapInner&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s1"&gt;&amp;#39;&amp;lt;table height=&amp;quot;100%&amp;quot; width=&amp;quot;100%&amp;quot;&amp;gt;\&lt;/span&gt;
-&lt;span class="s1"&gt;       &amp;lt;tr&amp;gt;&amp;lt;td style=&amp;quot;vertical-align: middle;&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;\&lt;/span&gt;
-&lt;span class="s1"&gt;     &amp;lt;/table&amp;gt;&amp;#39;&lt;/span&gt;
-  &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;p&gt;2011－09－22 16：09
+修改修改currentXPage取值方式，使之更为通用
+currentXPage=Math.abs(Math.floor(that.x/that.wrapper.offsetWidth))+1;&lt;/p&gt;
+&lt;p&gt;把onScrollPageFliped改成onScrollXPageFliped便于以后扩展&lt;/p&gt;
+&lt;p&gt;that.wrapper.offsetWidth是一个非常有用的scroller宽度。&lt;/p&gt;
+&lt;p&gt;未改动之前的iScroll3使用方式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scroller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;snap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;momentum&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;hScrollbar&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
 &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;注: 将要垂直居中的容器class设成&lt;code&gt;vertical-align-middle&lt;/code&gt;即可，如前一例：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;vertical-align-middle&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;height: 100px;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;span&amp;gt;&lt;/span&gt;hello world!&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;p&gt;从上面代码可以看出，iScroll3的原型里只有一个回调方法onScrollEnd，这个函数只要是页内任何touch move事件都会触发，这就导致很多很多需要翻页时处理的事，在onScrollEnd发生，而且是多次，资源消耗非常严重。
+对于杂志阅读，很多是翻页才加动画效果或页面效果的，而在页内不需要任何事件。
+所以性能优化：减少onScrollEnd（）中使用任何代码&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加1个配置项&lt;/li&gt;
+&lt;li&gt;1） isFullScreen:true,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当iScroll3嵌套的时候，只要最外层的iScroll3的 isFullScreen即可，内部均为false.所以默认值为true.&lt;/p&gt;
+&lt;p&gt;下面是测试代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scroller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;snap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;momentum&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;hScrollbar&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+&lt;span class="p"&gt;},&lt;/span&gt;
+
+&lt;span class="nx"&gt;onScrollXPageFliped&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+
+&lt;span class="c1"&gt;//翻页时设置不许全屏&lt;/span&gt;
+&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;isFullScreen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;onScrollXPageFliped&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;currentXPage&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scroller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;snap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;momentum&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;hScrollbar&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;isFullScreen&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="p"&gt;},&lt;/span&gt;
+
+&lt;span class="nx"&gt;onScrollXPageFliped&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;onScrollXPageFliped&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;currentXPage&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;增加一个回调函数&lt;/li&gt;
+&lt;li&gt;1） onScrollXPageFliped:function(){},//翻页事件处理回调函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;测试代码同上&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增加2个全局变量&lt;/li&gt;
+&lt;li&gt;1） currentXPage:1,&lt;/li&gt;
+&lt;li&gt;2） _isPageFliped:false,//私有&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;全局变量使用方法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scroller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;snap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;momentum&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;hScrollbar&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;isFullScreen&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="p"&gt;},&lt;/span&gt;
+
+&lt;span class="nx"&gt;onScrollXPageFliped&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="c1"&gt;//在回调方法内部，使用this对象获得全局变量&lt;/span&gt;
+&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;onScrollXPageFliped&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;currentXPage&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;_onScrollXPageFlipedCallback&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;&lt;span class="c1"&gt;//翻页后－回调函数&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;//在回调方法外部，使用myScroll对象获得全局变量&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;_onScrollXPageFlipedCallback&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;onScrollXPageFliped&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;myScroll&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;currentXPage&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;源码中currentXPage取决于that.wrapper.offsetWidth
+代码如下：
+that.currentXPage=Math.abs(Math.floor(that.x/that.wrapper.offsetWidth))+1;&lt;/p&gt;
+&lt;p&gt;－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－&lt;/p&gt;
+&lt;p&gt;说明iScroll4和3的区别之一&lt;/p&gt;
+&lt;p&gt;iscroll4里，是wrapper的第一个子节点。这点在使用用法上很明显&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;typeof&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;object&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;doc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;el&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scroller&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;children&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;iScroll3里，是父节点&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;typeof&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;object&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;el&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;element&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parentNode&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;html代码如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;wrapper&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;scroller&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;enjoy it!&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>PHP 实现单例模式</title><link href="http://i5ting.com/2011/06/singleton-in-php/" rel="alternate"></link><updated>2011-06-17T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-06-17:2011/06/singleton-in-php/</id><summary type="html">&lt;h1&gt;单例模式&lt;/h1&gt;
-&lt;p&gt;目前的一个项目有几个模块需要实现单例模式，于是想实现一个 Singleton 基类来使这些模块通过继承该基类实现 Singleton。&lt;/p&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;getInstance&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nb"&gt;isset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;__CLASS__&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;__construct&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;__clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll_inner_fullscreen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scroller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;desktopCompatibility&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;scrollTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
 
 
-&lt;p&gt;这是一个 Singleton 的 PHP 实现，然而这时希望通过如下代码使 Database 类实现 Singleton 是不可行的:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Database&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Singleton&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;因为 &lt;code&gt;__CLASS__&lt;/code&gt; 获得的永远只是父类（Singleton）而不是子类，所以无法获知子类类信息，自然也就无法实现子类的单例。&lt;/p&gt;
-&lt;p&gt;PHP5.3 提供了&lt;a href="http://cn.php.net/manual/en/function.get-called-class.php"&gt;&lt;code&gt;get_called_class()&lt;/code&gt;&lt;/a&gt;函数，用过此函数可以实现&lt;a href="http://www.xinze.me/php-%E5%8F%AF%E7%BB%A7%E6%89%BF%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%BE%8B%E5%AD%90-singleton/"&gt; Singleton 的继承&lt;/a&gt;。&lt;/p&gt;&lt;/p&gt;
-&lt;h2&gt;其它实现方式&lt;/h2&gt;
-&lt;p&gt;为了能在 PHP5.3 以前实现 Singleton 的继承，我们可以定义一个静态数组来维护类的实例，定义以及使用方法如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="nv"&gt;$instances&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;array&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-
-    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;getInstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$className&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nb"&gt;isset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$className&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$className&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nv"&gt;$className&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="nv"&gt;$instances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$className&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;__construct&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="k"&gt;protected&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;__clone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myScroll_inner_fullscreen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;iScroll4&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;wapper&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nx"&gt;desktopCompatibility&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nx"&gt;onScrollEnd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;scrollTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Database&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Singleton&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;Singleton&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="na"&gt;getInstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Database&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="na"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="design pattern"></category><category term="php"></category><category term="singleton"></category></entry></feed>
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>lion安装小记</title><link href="http://i5ting.com/2011/09/lion/" rel="alternate"></link><updated>2011-09-13T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-13:2011/09/lion/</id><summary type="html">&lt;p&gt;2011-09-13 09:35 (分类:默认分类)&lt;/p&gt;
+&lt;p&gt;lion安装小记&lt;/p&gt;
+&lt;p&gt;1、下载lion镜像&lt;/p&gt;
+&lt;p&gt;http://www.codeios.com/thread-1547-1-1.html&lt;/p&gt;
+&lt;p&gt;注：我有镜像，需要的可以找我来拷贝（嘻嘻，不知道咋放到公司服务器上，有需要的自己来吧）&lt;/p&gt;
+&lt;p&gt;直接点击，重启自动安装就可以（大约31分钟左右）&lt;/p&gt;
+&lt;p&gt;问题是能进入登陆界面但不能登录，大概是10。7不能读10.6用户的数据库&lt;/p&gt;
+&lt;p&gt;2、重建帐户&lt;/p&gt;
+&lt;p&gt;重启开机command+s,打&lt;/p&gt;
+&lt;p&gt;mount -uaw
+rm /var/db/.AppleSetupDone
+exit&lt;/p&gt;
+&lt;p&gt;重启之后会提示你重新建立帐户, 创建完成后即可进入系统&lt;/p&gt;
+&lt;p&gt;ok，可以登录&lt;/p&gt;
+&lt;p&gt;存在的问题是已有用户丢失，原目录下文件如何处理&lt;/p&gt;
+&lt;p&gt;解决此问题只需在account里（如果熟悉命令用useradd也可以）新建一个一样名称的帐户即可，目录默认和用户名相同。&lt;/p&gt;
+&lt;p&gt;目前使用无问题，很好用&lt;/p&gt;
+&lt;p&gt;具体lion特性，请看http://tech.163.com/digi/11/0720/20/79ECM0HG0016192R.html&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>非常好用的JsonToString方法</title><link href="http://i5ting.com/2011/09/json-to-string/" rel="alternate"></link><updated>2011-09-05T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-05:2011/09/json-to-string/</id><summary type="html">&lt;p&gt;2011-09-05 13:12 (分类:默认分类)&lt;/p&gt;
+&lt;p&gt;非常好用的JsonToString方法&lt;/p&gt;
+&lt;p&gt;//'&lt;/p&gt;
+&lt;p&gt;Jsontostring代码 &lt;/p&gt;
+&lt;p&gt;function JsonToString(o) {   &lt;br /&gt;
+    var arr = [];&lt;br /&gt;
+    var fmt = function(s) {&lt;br /&gt;
+        if (typeof s == 'object' &amp;amp;&amp;amp; s != null) return JsonToStr(s);&lt;br /&gt;
+        return /^(string|number)$/.test(typeof s) ? "'" + s + "'" : s;&lt;br /&gt;
+    }&lt;br /&gt;
+    for (var i in o)&lt;br /&gt;
+         arr.push("'" + i + "':" + fmt(o[i]));&lt;br /&gt;
+    return '{' + arr.join(',') + '}';&lt;br /&gt;
+}  &lt;/p&gt;
+&lt;p&gt;我反正用的很爽，哈哈&lt;/p&gt;
+&lt;p&gt;另外: 如果不想json中的数字也被字符串化. 可以改造: return /^(string|number)$/.test(typeof s) ? '"' + s + '"' : s; 为 : return /^(string)$/.test(typeof s) ? '"' + s + '"' : s; (其实就是把number类型的忽略掉而已)&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>mac下让终端显示颜色</title><link href="http://i5ting.com/2011/09/terminal-color/" rel="alternate"></link><updated>2011-09-05T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-05:2011/09/terminal-color/</id><summary type="html">&lt;p&gt;2011-09-05 15:05 (分类:默认分类)
+mac下让终端显示颜色&lt;/p&gt;
+&lt;p&gt;alias ls="ls -G"&lt;/p&gt;
+&lt;p&gt;而linux是&lt;/p&gt;
+&lt;p&gt;alias ls="ls --color"&lt;/p&gt;
+&lt;p&gt;fuck  the  differences&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>mac上开启ssh服务</title><link href="http://i5ting.com/2011/09/ssh/" rel="alternate"></link><updated>2011-09-04T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-04:2011/09/ssh/</id><summary type="html">&lt;p&gt;2011-09-04 17:01 (分类:默认分类)&lt;/p&gt;
+&lt;p&gt;mac默认已经安装了openssh，所以只需要打开服务即可。&lt;/p&gt;
+&lt;p&gt;选择System prefrence -&amp;gt; sharing , 将remote connectionx 打开即可。&lt;/p&gt;
+&lt;p&gt;原来so easy&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry></feed>

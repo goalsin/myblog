@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Alfred Sang - javascript</title>
+      <link href="http://i5ting.com/feed" type="application/rss+xml" rel="alternate" title="Alfred Sang RSS Feed" />
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Montserrat:700' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/normalize.css' type='text/css' media='all' />
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css' type='text/css' media='all' />
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/style.css' type='text/css' media='all' />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <!--[if lt IE 9]> <script src="http://i5ting.com/theme/js/vendor/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+  <section class="l-cover">
+    <h2>献给我的同代人</h2>
+    作者：舒婷<br>
+<br>
+    　　他们在天上<br>
+    　　愿为一颗星<br>
+    　　他们在地上<br>
+    　　愿为一盏灯<br>
+    　　不怕显得多么渺小<br>
+    　　只要尽其可能<br><br>
+
+    　　唯因不被承认<br>
+    　　才格外勇敢真诚<br>
+    　　即使像眼泪一样跌碎<br>
+    　　敏感的大地<br>
+    　　处处仍有<br>
+    　　持久而悠远的回声<br><br>
+
+    　　为开拓心灵的处女地<br>
+    　　走入禁区，也许——<br>
+    　　就在那里牺牲<br>
+    　　留下歪歪斜斜的脚印<br>
+    　　给后来者<br>
+    　　签署通行证<br><br>
+
+    　　　1980.4
+    <header id="banner" class="body">
+      <h1 class="site-name"><a href="http://i5ting.com/">Alfred Sang</a></h1>
+      <p class="description">
+        Manager、全栈工程师（Web, iOS）<br>80 后，桑世龙<br />
+        [<a href="http://i5ting.com/pages/about/">关于</a>, <a href="http://i5ting.com/pages/novel/">小说</a>, <a href="http://i5ting.com/pages/peom/">诗歌
+        </a>]
+      </p>
+      <ul class="social-links">
+        <li><a href="https://twitter.com/i5ting">Twitter</a></li>
+        <li><a href="https://github.com/i5ting">Github</a></li>
+        <li><a href="http://dribbble.com/i5ting">Dribbble</a></li>
+      </ul>
+    </header>
+  </section>
+  <section class="l-content">
+    <div class="inner">
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/09/ssh/">
+        <h2 class="article-title">mac上开启ssh服务</h2>
+      </a>
+      <p class="article-meta" title="2011-09-04T00:00:00">04 Sep 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-09-04 17:01 (分类:默认分类)</p>
+<p>mac默认已经安装了openssh，所以只需要打开服务即可。</p>
+<p>选择System prefrence -&gt; sharing , 将remote connectionx 打开即可。</p>
+<p>原来so easy</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/ssh/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/ssh/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/08/conclude/">
+        <h2 class="article-title">离职总结</h2>
+      </a>
+      <p class="article-meta" title="2011-08-15T00:00:00">15 Aug 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-08-15 10:11 (分类:默认分类)</p>
+<p>完成了哪些事</p>
+<p>1、自动化部署想法演进过程</p>
+<p>1)最开始每台机器登录，拷贝，编写shell脚本，烦。</p>
+<p>2)采用ssh和scp，去掉sshkey，以一主机为主，向其他机器scp安装文件，ssh远程执行命令完成启动安装，问题是去掉sshkey密码是一个苦力活，需要改进。</p>
+<p>3)采用apache Ant，利用sshexec和scp这2个task，密码可以动态传入，也可以写到配置文件中，日志答应规范，部署简洁，问题是需要依赖java和ant。</p>
+<p>4)最后马哥用c封装了ssh2，实现配置化，不依赖java即可完成安装部署。</p>
+<p>2、形成100页文档《凌云志.doc》，做了一次linux培训</p>
+<p>内容涵盖了上面说的《自动化部署想法演进过程》，BI相关部分，管理思考，linux总结，技术问题等。</p>
+<p>并于上周三8月10日下午四点做了一次linux培训。</p>
+<p>BI的部分是我之前工作想法的总结，对部门应该是有益的。马哥一直对我很好，如果要不是想自己干点事业，真想跟他混，言传身教，真是受益多多。</p>
+<p>3、搭建了一些环境，大家可以使用，尤其是BBS论坛</p>
+<p>尤其是BBS论坛，个人觉得非常重要，公司的管理方式仍是以小公司方式来，或者说比较原始，缺少沉淀，这么说其实不准确，是有沉淀，但只是在某几个人脑子里。</p>
+<p>信息不透明会是一个硬伤。</p>
+<p>http://172.16.205.119/</p>
+<p>论坛内容位置 /home/wwwroot/bbs</p>
+<p>用户名密码admin/admin</p>
+<p>另外有jira，confluence，db2，maven伺服，lnmp，rpm安装包，git等资源，详细信息见文档。</p>
+<p>附：</p>
+<p>去天津出差3天的发票一直没报，能报吗？</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/07/jquery-load/">
+        <h2 class="article-title">Jquery的load()在Safari或IE8中不能执行脚本的解决方案</h2>
+      </a>
+      <p class="article-meta" title="2011-07-14T00:00:00">14 Jul 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-07-14 19:01 (分类:默认分类)</p>
+<p>Jquery的load()在Safari或IE8中不能执行脚本的解决方案</p>
+<p>恨人，竟然真的遇到了</p>
+<p>http://www.cnblogs.com/techmango/archive/2011/05/19/Jquery_load_cannot_execute_javasscript_in_Safari_IE.html</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/07/cloud-idea/">
+        <h2 class="article-title">云计算的一点想法</h2>
+      </a>
+      <p class="article-meta" title="2011-07-11T00:00:00">11 Jul 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-07-11 09:38 (分类:默认分类)</p>
+<p>云计算4个领域：管理，虚拟化，计算，存储 </p>
+<p>其实，归结起来云计算的本质在于管理模式的变更。</p>
+<p>虚拟化，计算，存储最终的落点仍是管理，一种更为友好合理的方式，</p>
+<p>虚拟化实现了资源更为合理的使用和调配，计算能力则是结合分布式应用和nosql存储，利用map/reduce等算法简化计算及作业划分方式，存储上由传统的rdbms转化为使用于特定场景的NoSQL这样键值对方式的数据库，提高了访问速度，降低了其事务性，nosql存储为云计算中的计算能力提供了基础设施。</p>
+<p>我们要做的是一个分布式管理平台。主要用于管理：资源，虚拟化，计算(其实是作业管理或调度管理)，存储</p>
+<p>云里另一个概念即弱终端的云端。</p>
+<p>我们希望通过一个简单的页面，可以完成对云中资源的管理，而不需要ssh连接到对应主机上进行操作。</p>
+<p>1）资源管理</p>
+<p>2）作业调度</p>
+<p>3）虚拟主机建立</p>
+<p>4）远程管理</p>
+<p>我们希望做到：</p>
+<p>1）知道ip地址，可以在远程主机上建立用户</p>
+<p>2）在该用户上可以虚拟化，建立n个虚拟主机，采用拖拽方式，把虚拟主机图标拖到当前IP上，然后双击虚拟主机图标进行个性化设置。</p>
+<p>3）创建和管理作业任务，让作业任务管理到对应虚拟主机上，控制其所用资源和执行情况。主要可以完成以下3个方面</p>
+<div class="highlight"><pre> <span class="mi">3</span><span class="err">。</span><span class="mi">1</span><span class="err">）远程执行命令，主机监控等</span>
+
+ <span class="mi">3</span><span class="err">。</span><span class="mi">2</span><span class="err">）资源管理</span>
+
+ <span class="mi">3</span><span class="err">。</span><span class="mi">3</span><span class="err">）软件的安装部署</span>
+</pre></div>
+
+
+<p>任务是我们自己定义的，可以很容易的扩展，进而实现各种用途。</p>
+<p>4）收集所有元数据，以可定制报表的方式展现出来。</p>
+<p>可行性分析</p>
+<p>1、目前部署需要web可视化部署</p>
+<p>2、江苏电力有主机监控的需求，虽然他们有IBM的Trivos，但是这东西启动太慢，5分钟，所以他们需要用，但很少用，</p>
+<p>其实对于我们很容易扩展它，可远程执行命令，返回执行结果，这就是很好的监控。</p>
+<p>3、为以后的虚拟化等产品做好准备。扩展云平台各种管理都极其容易。</p>
+<p>从战略角度讲，获得［集群节点信息］就获得了云计算的制高点。</p>
+<p>无论主机，虚拟主机，作业，资源等都是可控的，上层应用的扩展价值极大。</p>
+<p>实现方式：暂分为3个阶段</p>
+<p>初步阶段：</p>
+<p>1。实现web终端，远程执行命令</p>
+<p>基本完成阶段：完成自动部署</p>
+<p>2。完成自动部署步骤：</p>
+<div class="highlight"><pre> <span class="mi">1</span><span class="err">÷上传资源，只允许上传</span><span class="n">tar</span><span class="err">文件，</span><span class="n">tar</span> <span class="n">tvf</span><span class="err">查看内容</span>
+
+ <span class="mi">2</span><span class="err">÷创建用户</span>
+
+ <span class="mi">3</span><span class="err">÷任务管理，拷贝到对应主机，解压，安装，返回日志</span>
+
+ <span class="mi">4</span><span class="err">÷远程多主机的执行顺序启动命令</span>
+
+ <span class="mi">5</span><span class="err">÷远程监控</span>
+</pre></div>
+
+
+<p>可扩展阶段：</p>
+<p>3。管理虚拟化，计算任务，存储安装与设置</p>
+<p>主要工作：</p>
+<p>主机上资源管理</p>
+<p>ant作业配置(依赖上面的资源管理)</p>
+<p>作业调度管理</p>
+<p>主机用户创建，以用户作为角色，管理作业任务</p>
+<p>1.0版本规划</p>
+<p>目标：尽快实现一个原型，提供可移植扩展的api</p>
+<p>jquery＋jsp＋servlet＋jdbc</p>
+<p>数据库：hsqldb</p>
+<p>tomcat</p>
+<p>2.0版本规划</p>
+<p>目标：产品化</p>
+<p>采用portal，和主流框架</p>
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</p>
+<p>说明：上面的思考源于此次安装过程的再总结</p>
+<p>1安装baserpm     </p>
+<p>2安装gccinstall</p>
+<p>3安装mysql</p>
+<p>4安装datacell</p>
+<p>5安装tomcat</p>
+<p>6安装logmonitor</p>
+<p>7测试是否安装成功</p>
+<p>回顾一下整个过程</p>
+<p>项目</p>
+<p>install logmonitor project</p>
+<p>文件列表－－资源</p>
+<p>dist/:</p>
+<div class="highlight"><pre> <span class="n">doc</span>            <span class="err">使用文档</span>
+
+ <span class="n">install</span>         <span class="err">系统安装软件</span>
+
+ <span class="n">yoyosys</span>     <span class="err">友友公司软件</span>
+
+ <span class="n">README</span>   <span class="err">光盘说明文件</span>
+</pre></div>
+
+
+<p>部署项－－ant对应的target</p>
+<p>1安装baserpm</p>
+<p>2安装gccinstall</p>
+<p>3安装mysql</p>
+<p>4安装datacell</p>
+<p>5安装tomcat</p>
+<p>6安装logmonitor</p>
+<p>主机信息－－集群节点</p>
+<p>IP                    hostname          OS        版本号</p>
+<p>172.16.88.47</p>
+<p>172.16.88.48</p>
+<p>是否需要创建用户</p>
+<p>172.16.88.47－－yoyoadm/pass123!</p>
+<p>172.16.88.48－－yoyoadm/pass123!</p>
+<p>主机－部署对应关系－－scp和ssh的target配置信息</p>
+<p>【主机】         【部署项】     【用户】          【安装目录】</p>
+<p>172.16.88.47－－1baserpm－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－2gccinstall－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－4datacell－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－5tomcat－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－6logmonitor－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－1baserpm－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－2gccinstall－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－3mysql－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－4datacell－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>【主机172.16.88.47任务】－－执行target</p>
+<p>部署项 －－1安装baserpm－－安装脚本install.sh－－记录日志baserpm.install.log－－确认是否执行成功</p>
+<p>部署项 －－2安装gccinstall－－安装脚本install.sh－－记录日志gccinstall.install.log－－确认是否执行成功</p>
+<p>部署项 －－4安装datacell－－安装脚本install.sh－－记录日志datacell.install.log－－确认是否执行成功</p>
+<p>部署项 －－5安装tomcat－－安装脚本install.sh－－记录日志tomcat.install.log－－确认是否执行成功</p>
+<p>部署项 －－6安装logmonitor－－安装脚本install.sh－－记录日志logmonitor.install.log－－确认是否执行成功</p>
+<p>【主机172.16.88.48任务】－－执行target</p>
+<p>部署项 －－1安装baserpm－－安装脚本install.sh－－记录日志baserpm.install.log－－确认是否执行成功</p>
+<p>部署项 －－2安装gccinstall－－安装脚本install.sh－－记录日志gccinstall.install.log－－确认是否执行成功</p>
+<p>部署项 －－3安装mysql－－安装脚本install.sh－－记录日志mysql.install.log－－确认是否执行成功</p>
+<p>部署项 －－4安装datacell－－安装脚本install.sh－－记录日志datacell.install.log－－确认是否执行成功</p>
+<p>【My任务】－－自定义target，负责启动停止等</p>
+<p>－【启动】</p>
+<div class="highlight"><pre>      <span class="err">启动</span><span class="n">datacell</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="p">.</span><span class="n">sh</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="p">.</span><span class="n">sh</span>
+
+      <span class="err">启动</span><span class="n">mysql</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="n">service</span> <span class="n">mysqld</span> <span class="n">start</span>
+
+      <span class="err">启动</span><span class="n">tomcat</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">tomcat</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">startup</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<p>－【停止】</p>
+<div class="highlight"><pre>      <span class="err">停止</span><span class="n">datacell</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">stop</span><span class="p">.</span><span class="n">sh</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">stop</span><span class="p">.</span><span class="n">sh</span>
+
+      <span class="err">停止</span><span class="n">mysql</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="n">service</span> <span class="n">mysqld</span> <span class="n">stop</span>
+
+      <span class="err">停止</span><span class="n">tomcat</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">tomcat</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shutdown</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<p>172.16.88.47－－yoyoadm/pass123!</p>
+<p>可登录，查看，执行，创建task</p>
+<p>webShell</p>
+<p>webBrowser</p>
+<p>ftp</p>
+<p>监控问题</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/cloud-idea/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/cloud-idea/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/07/implement-vertical-align/">
+        <h2 class="article-title">实现 vertical-align 的几种办法</h2>
+      </a>
+      <p class="article-meta" title="2011-07-07T00:00:00">07 Jul 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>一个简单的例子：</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;vertical-align: middle; height: 100px;&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span&gt;</span>hello world!<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<p>可以看到“hello world!”并没有垂直居中。网上有很多人从很多不同地方面进行分析，其实简单概括就一句话：
+<code>vertical-align</code>的作用范围仅限<code>display: table-cell</code>或<code>display: inline-block</code>元素。</p>
+<p>那么如何实现垂直居中呢？</p>
+
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/implement-vertical-align/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/implement-vertical-align/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+<p class="paginator">
+        <a href="http://i5ting.com/tag/javascript/">&laquo;</a>
+    Page 2 / 3
+        <a href="http://i5ting.com/tag/javascript/page/3/">&raquo;</a>
+</p>
+
+<script type="text/javascript">
+var disqus_shortname = 'i5ting';
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+    </div>
+  </section>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-46124852-1', 'zihua.li');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

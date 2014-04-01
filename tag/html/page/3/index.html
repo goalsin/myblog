@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Alfred Sang - html</title>
+      <link href="http://i5ting.com/feed" type="application/rss+xml" rel="alternate" title="Alfred Sang RSS Feed" />
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Montserrat:700' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/normalize.css' type='text/css' media='all' />
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css' type='text/css' media='all' />
+    <link rel='stylesheet'  href='http://i5ting.com/theme/css/style.css' type='text/css' media='all' />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <!--[if lt IE 9]> <script src="http://i5ting.com/theme/js/vendor/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+  <section class="l-cover">
+    <h2>献给我的同代人</h2>
+    作者：舒婷<br>
+<br>
+    　　他们在天上<br>
+    　　愿为一颗星<br>
+    　　他们在地上<br>
+    　　愿为一盏灯<br>
+    　　不怕显得多么渺小<br>
+    　　只要尽其可能<br><br>
+
+    　　唯因不被承认<br>
+    　　才格外勇敢真诚<br>
+    　　即使像眼泪一样跌碎<br>
+    　　敏感的大地<br>
+    　　处处仍有<br>
+    　　持久而悠远的回声<br><br>
+
+    　　为开拓心灵的处女地<br>
+    　　走入禁区，也许——<br>
+    　　就在那里牺牲<br>
+    　　留下歪歪斜斜的脚印<br>
+    　　给后来者<br>
+    　　签署通行证<br><br>
+
+    　　　1980.4
+    <header id="banner" class="body">
+      <h1 class="site-name"><a href="http://i5ting.com/">Alfred Sang</a></h1>
+      <p class="description">
+        Manager、全栈工程师（Web, iOS）<br>80 后，桑世龙<br />
+        [<a href="http://i5ting.com/pages/about/">关于</a>, <a href="http://i5ting.com/pages/novel/">小说</a>, <a href="http://i5ting.com/pages/peom/">诗歌
+        </a>]
+      </p>
+      <ul class="social-links">
+        <li><a href="https://twitter.com/i5ting">Twitter</a></li>
+        <li><a href="https://github.com/i5ting">Github</a></li>
+        <li><a href="http://dribbble.com/i5ting">Dribbble</a></li>
+      </ul>
+    </header>
+  </section>
+  <section class="l-content">
+    <div class="inner">
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/06/haproxy/">
+        <h2 class="article-title">HAPROXY总结</h2>
+      </a>
+      <p class="article-meta" title="2011-06-02T00:00:00">02 Jun 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-06-02 21:31 (分类:默认分类)</p>
+<p>下载源码</p>
+<p>解压，执行,其实所有细节都在README文件中</p>
+<p>uname -r   #查看内核版本</p>
+<p>此项目不是标准的autoconf配置的，所以安装方式不太一样</p>
+<p>make TARGET=linux26 PREFIX=/usr/local/haprpxy</p>
+<p>make install PREFIX=/usr/local/haproxy</p>
+<p>配置文件</p>
+<p>/usr/local/haproxy/haproxy.cfg</p>
+<p>－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>global</p>
+<p>log 127.0.0.1 local0</p>
+<p>maxconn 4096</p>
+<p>user  root</p>
+<p>group root</p>
+<p>daemon</p>
+<p>nbproc 1</p>
+<p>pidfile /usr/local/haproxy/run/haproxy.pid</p>
+<p>defaults</p>
+<h6>###日志</h6>
+<p>log   global</p>
+<p>contimeout 5000</p>
+<p>clitimeout 30000</p>
+<p>srvtimeout 30000</p>
+<p>listen admin_stats</p>
+<p>bind 0.0.0.0:1080</p>
+<p>mode http</p>
+<p>log 127.0.0.1 local0 err</p>
+<p>stats uri /admin?stats</p>
+<p>listen test 172.16.205.154:80</p>
+<div class="highlight"><pre>   <span class="n">mode</span> <span class="n">http</span>
+</pre></div>
+
+
+<p>balance source</p>
+<p>option allbackups</p>
+<p>server denlai1 172.16.205.122:8080/logmonitor  check inter 1500 rise 3 fall 3</p>
+<p>server denlai2 172.16.205.131:8080/logmonitor  check inter 1500 rise 3 fall 3</p>
+<p>－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>启动</p>
+<p>不要日志</p>
+<p>haproxy -f /usr/local/haproxy/haproxy.cfg  &amp;</p>
+<p>查看日志</p>
+<p>haproxy -f /usr/local/haproxy/haproxy.cfg -d &amp;</p>
+<p>测试</p>
+<p>访问下面地址    http://172.16.205.154/logmonitor/</p>
+<p>开机启动，参见下文</p>
+<p>http://www.miotour.com/2010/11/22/haproxy安装配置调优/</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2011/06/use-git/">
+        <h2 class="article-title">采用Git</h2>
+      </a>
+      <p class="article-meta" title="2011-06-02T00:00:00">02 Jun 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-06-02 21:32 (分类:默认分类)</p>
+<p>采用Git</p>
+<p>优点：支持分布式离线操作，而且本地分支可以作为新的仓库，特别方便，不会有一台机器down了需要重建仓库的问题</p>
+<p>首先安装Git，源码安装，特简单，略</p>
+<p>然后，启动服务共享库</p>
+<div class="highlight"><pre> <span class="n">git</span> <span class="n">daemon</span> <span class="o">--</span><span class="n">reuseaddr</span> <span class="o">--</span><span class="n">base</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span> <span class="o">--</span><span class="n">export</span><span class="o">-</span><span class="n">all</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">enable</span><span class="o">=</span><span class="n">receive</span><span class="o">-</span><span class="n">pack</span> <span class="o">&amp;</span>
+
+ <span class="err">在</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span><span class="err">下新建</span><span class="n">tiger_common</span><span class="err">文件夹</span>
+</pre></div>
+
+
+<p>cd /usr/git/tiger_common</p>
+<p>git --bare init  #不要直接用git init，这样有问题</p>
+<p>echo 'test'&gt;test.txt</p>
+<p>git add test.txt</p>
+<p>git commit -a -m 'init here '</p>
+<p>在154上</p>
+<p>git clone git://172.16.205.153/tiger_common</p>
+<p>这时就可以随意修改代码了</p>
+<p>echo 'test'&gt;test.txt</p>
+<p>git add test.txt</p>
+<p>git commit -a -m '154 test '</p>
+<p>这里的push是提交</p>
+<p>git push origin master</p>
+<p>其他机器上是pull更新</p>
+<p>git pull  origin master</p>
+<p>如此便可以完成版本控制</p>
+<p>主版本位于153</p>
+<p>其他的机器151－－－156</p>
+<p>每一个都以crontab进行调度</p>
+<p>写一个updataGit.sh</p>
+<div class="highlight"><pre> <span class="n">cd</span> <span class="p">.</span><span class="o">/</span><span class="n">tiger_common</span>
+
+ <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+
+
+<p>配置crontab为每晚11点更新。</p>
+<p>0 23 * * * sh /usr/git/updateGit.sh</p>
+<p>如此完成同步</p>
+<p>未完成功能：</p>
+<div class="highlight"><pre> <span class="mi">1</span><span class="err">、权限验证部分</span>
+</pre></div>
+
+
+<p>确认cron日志</p>
+<div class="highlight"><pre> <span class="n">Jun</span>  <span class="mi">1</span> <span class="mi">23</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">01</span> <span class="n">localhost</span> <span class="n">crond</span><span class="p">[</span><span class="mi">21638</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="n">CMD</span> <span class="p">(</span><span class="n">sh</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">updateGit</span><span class="p">.</span><span class="n">sh</span> <span class="p">)</span>
+
+ <span class="err">确实已经执行了</span>
+</pre></div>
+
+
+<p>测试效率</p>
+<p>[root@151 a]# git clone git://172.16.205.153/tiger_common</p>
+<p>Cloning into tiger_common...</p>
+<p>remote: Counting objects: 1069, done.</p>
+<p>remote: Compressing objects: 100% (684/684), done.</p>
+<p>remote: Total 1069 (delta 344), reused 1060 (delta 344)</p>
+<p>Receiving objects: 100% (1069/1069), 531.52 MiB | 57.03 MiB/s, done.</p>
+<p>Resolving deltas: 100% (344/344), done.</p>
+<p>一共是531.52 MiB |每秒传输速度是 57.03 MiB/s</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2008/12/php/">
+        <h2 class="article-title">物品分类列表核心算法</h2>
+      </a>
+      <p class="article-meta" title="2008-12-11T00:00:00">11 Dec 2008</p>
+    </header>
+    <div class="typo article-body">
+      <p>2008-12-11 15:04 (分类:默认分类)</p>
+<p>出入库记录      </p>
+<p>-------------Type            actionGetAllType()</p>
+<div class="highlight"><pre><span class="err">首页</span> <span class="o">-&gt;</span> <span class="err">库存管理</span> <span class="o">-&gt;</span> <span class="err">总分类</span> <span class="o">-&gt;</span>
+</pre></div>
+
+
+<p>这个是一个死的字符串。而我们要实现的功能是这样的，当点击不同分类的时候，进入该分类的详细列表。这样就要求动态的生成一个分类连接字符串，由于该表中仅 3 个字段，且每个分类只有一个上层分类，这样就很容易实现</p>
+<p>参数是 type_id</p>
+<p>以下是代码：</p>
+<div class="highlight"><pre>    <span class="nx">function</span> <span class="nx">getStrOfTitle</span><span class="p">(</span> <span class="nv">$type_id</span> <span class="p">)</span> <span class="p">{</span>
+
+<span class="c1">// 定义 title 字符串，不变的地方 ;</span>
+
+
+
+              <span class="nv">$title</span> <span class="o">=</span> <span class="s2">&quot;&lt;br&gt;&lt;a href=&quot;</span> <span class="nx">.</span> <span class="nb">url</span> <span class="p">(</span> <span class="nx">BoDashboard</span><span class="p">,</span> <span class="nb">index</span> <span class="p">)</span> <span class="nx">.</span> <span class="s2">&quot;  target=_parent&gt; 首页 &lt;/a&gt; -&gt;  &lt;a href=&quot;</span> <span class="nx">.</span> <span class="nb">url</span> <span class="p">(</span> <span class="k">Type</span><span class="p">,</span> <span class="nx">AddType</span> <span class="p">)</span> <span class="nx">.</span> <span class="s2">&quot;  target=_self&gt; 库存管理 &lt;/a&gt;-&gt; &lt;a href=&quot;</span> <span class="nx">.</span> <span class="nb">url</span> <span class="p">(</span> <span class="k">Type</span><span class="p">,</span> <span class="nx">GetAllType</span> <span class="p">)</span> <span class="nx">.</span> <span class="s2">&quot;  target=_self&gt; 总分类 &lt;/a&gt; -&gt;  &quot;</span> <span class="p">;</span>
+
+<span class="c1">// 定义最终 title 字符串 ;</span>
+
+
+
+       <span class="nv">$final_title</span> <span class="o">=</span> <span class="nv">$title</span> <span class="p">;</span>
+
+       <span class="c1">// 获得 title ，参数是 type_id</span>
+
+       <span class="nv">$type</span> <span class="o">=</span> <span class="nv">$this</span> <span class="o">-&gt;</span><span class="nx">_tbTypes</span><span class="o">-&gt;</span><span class="nb">find</span> <span class="p">(</span> <span class="nv">$type_id</span> <span class="p">);</span>
+
+       <span class="nv">$arr</span> <span class="o">=</span> <span class="kt">array</span> <span class="p">();</span>
+
+       <span class="nv">$parent_id</span> <span class="o">=</span> <span class="p">(</span> <span class="nx">int</span> <span class="p">)</span> <span class="nv">$type</span> <span class="err">[</span> <span class="s1">&#39;parent_id&#39;</span> <span class="cp">]</span>;
+
+       array_push ( $arr , $parent_id );
+
+       //echo $parent_id.&#39;<span class="nt">&lt;hr&gt;</span>&#39;;
+
+       while ( $parent_id != 1 ) {
+
+           $obj = $this -&gt;_tbTypes-&gt;find ( $parent_id );
+
+           $parent_id = ( int ) $obj <span class="cp">[</span> <span class="s1">&#39;parent_id&#39;</span> <span class="cp">]</span>;
+
+           //echo $obj <span class="cp">[</span><span class="s1">&#39;parent_id&#39;</span><span class="cp">]</span>;
+
+           array_push ( $arr , $parent_id );
+
+       }
+
+       sort ( $arr );
+
+       //url(&#39;Type&#39;,&#39;FindType&#39;, array(&#39;type_id&#39; =&gt; $type<span class="cp">[</span><span class="s1">&#39;typ</span>
+
+<span class="s1">       foreach ( $arr as $id ) {</span>
+
+<span class="s1">           $obj = $this -&gt;_tbTypes-&gt;find ( $id );</span>
+
+<span class="s1">           //echo $obj[&#39;</span><span class="nx">type_name</span><span class="s1">&#39;];</span>
+
+<span class="s1">           $final_title = $final_title . &quot;&lt;a href=&quot; . url ( &#39;</span><span class="k">Type</span><span class="s1">&#39; , &#39;</span><span class="nx">FindType</span><span class="s1">&#39; , array ( &#39;</span><span class="nx">type_id</span><span class="s1">&#39; =&gt; $obj [ &#39;</span><span class="nx">type_id</span><span class="s1">&#39; ] ) ) . &quot;  &gt;&quot; . $obj [ &#39;</span><span class="nx">type_name</span><span class="s1">&#39; ] . &quot;&lt;/a&gt;---&gt;&quot; ;</span>
+
+<span class="s1">           // echo  $final_title;</span>
+
+<span class="s1">       }</span>
+
+<span class="s1">       echo $final_title ;</span>
+
+<span class="s1">       dump ( $arr );</span>
+
+<span class="s1">    }</span>
+</pre></div>
+
+
+<p>记得到时候验证分类是否已经存在</p>
+<p>把 type_name 设为唯一索引，他就不会重复了</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2008/12/php/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2008/12/php/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
+      <a href="http://i5ting.com/2008/12/fleaphp/">
+        <h2 class="article-title">跟我学Fleaphp</h2>
+      </a>
+      <p class="article-meta" title="2008-12-09T00:00:00">09 Dec 2008</p>
+    </header>
+    <div class="typo article-body">
+      <p>2008-12-09 11:39 (分类:默认分类)</p>
+<p>Fleaphp是现在国内开源的最为流行的一站式开发框架，小巧但功能强大</p>
+<p>有兴趣一起来~</p>
+<p>1,看开发指南，这个没说的http://www.fleaphp.org/index.php?q=guide</p>
+<p>FleaPHP 开发指南目录如下</p>
+<div class="highlight"><pre><span class="err">§</span>     <span class="mf">1.</span> <span class="err">开始前的准备工作</span>
+
+<span class="err">§</span>     <span class="mf">2.</span> <span class="n">FleaPHP</span> <span class="err">中的</span> <span class="n">MVC</span> <span class="err">模式</span>
+
+<span class="err">§</span>     <span class="mf">3.</span> <span class="err">应用程序入口</span>
+
+<span class="err">§</span>     <span class="mf">4.</span> <span class="err">命名规范和目录结构</span>
+
+<span class="err">§</span>     <span class="mf">5.</span> <span class="err">应用程序设置</span>
+
+<span class="err">§</span>     <span class="mf">6.</span> <span class="err">访问数据库</span>
+
+<span class="err">§</span>     <span class="mf">7.</span> <span class="err">数据表关联</span>
+
+<span class="err">§</span>     <span class="mf">8.</span> <span class="err">如何使用</span> <span class="n">RBAC</span> <span class="err">组件实现访问控制</span>
+
+<span class="err">§</span>     <span class="n">A1</span><span class="p">.</span> <span class="err">升级</span> <span class="n">FleaPHP</span>
+
+<span class="err">§</span>     <span class="n">A2</span><span class="p">.</span> <span class="err">使用</span> <span class="n">PATHINFO</span> <span class="err">和</span> <span class="n">URL</span> <span class="err">重写</span>
+</pre></div>
+
+
+<p>很基础，看一下就会懂</p>
+<p>2跟着我做</p>
+<p>配置ide，我用的是zendstudio6.1，可以到http://www.zendstudio.net/下载和在线注册</p>
+<p>然后安装，注册。</p>
+<p>Window--àPreferenceàGeneral----</p>
+<p>(1)   Keys,输入content，可以看到content assitent即快捷键部分，按自己的习惯改，我用的是shift+空格</p>
+<p>(2)   Workspace，text file encoding改为utf8,不然中文乱码</p>
+<p>3新建php project（zendstudio可以建好几种工程，这里只介绍最简单的php 工程，flea开发只能用这个）</p>
+<p>输入名字，选择项目所在目录，是否添加js脚本支持</p>
+<p>建完工程后，先把flea的开发包中的Flea文件夹拷到项目中，例如我的C:\AppServ\www\fleaphp中的Flea文件夹</p>
+<p>然后在项目的根目录下建APP目录+index.php，里面放Controller,Model,View +DSN.php(数据源配置文件)</p>
+<p>Index.php代码如下</p>
+<div class="highlight"><pre> <span class="o">&lt;?</span><span class="nt">php</span>
+
+<span class="nt">require</span><span class="o">(</span><span class="s1">&#39;FLEA/FLEA.php&#39;</span><span class="o">);</span>
+
+<span class="nt">FLEA</span><span class="o">:</span><span class="nd">:loadAppInf</span><span class="o">(</span><span class="s1">&#39;APP/DSN.php&#39;</span><span class="o">);</span><span class="err">加载配置信息</span>
+
+<span class="nt">FLEA</span><span class="o">:</span><span class="nd">:import</span><span class="o">(</span><span class="nt">dirname</span><span class="o">(</span><span class="nt">__FILE__</span><span class="o">)</span> <span class="o">.</span> <span class="s1">&#39;/APP&#39;</span><span class="o">);</span><span class="err">指定目录</span>
+
+<span class="nt">FLEA</span><span class="o">:</span><span class="nd">:runMVC</span><span class="o">();</span>
+
+<span class="o">?&gt;</span>
+</pre></div>
+
+
+<p>DSN.php代码如下-------这是系统配置中的的和数据库相关的，其实还有很多项，相见开发指南的第五章，系统配置有2中方法</p>
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+
+    <span class="s1">&#39;internalCacheDir&#39;</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/_Cache&#39;</span><span class="p">,</span>
+
+    <span class="s1">&#39;dbDSN&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+
+        <span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;host&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;login&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;database&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;test&#39;</span>
+
+    <span class="p">)</span>
+
+<span class="p">);</span>
+</pre></div>
+
+
+<p>Fleaphp采用的规约的思想，就是很多东西是按照约定来做的，比如默认的控制器就是Controller文件夹下的Default.php，</p>
+<p>新建Default.php&lt;?php</p>
+<div class="highlight"><pre><span class="kr">class</span>  <span class="nx">Controller_Default</span> <span class="kr">extends</span> <span class="nx">FLEA_Controller_Action</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">actionIndex</span><span class="p">(){</span>
+       <span class="nx">echo</span> <span class="err">“</span><span class="nx">first</span> <span class="nx">page</span><span class="err">”</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">?&gt;</span>
+</pre></div>
+
+
+<p>看一下自己写控制器的语法</p>
+<p>1）  名字按照约定（建议不要乱写）Controller_Default即Controller目录下的Default.php</p>
+<p>2）  继承自FLEA_Controller_Action</p>
+<p>看一下该类的注释，你就会明白了</p>
+<ul>
+<li>
+<p>FLEA_Controller_Action 实现了一个其它控制器的超类，</p>
+</li>
+<li>
+<p>为开发者自己的控制器提供了一些方便的成员变量和方法</p>
+</li>
+</ul>
+<p>*</p>
+<ul>
+<li>
+<p>开发者不一定需要从这个类继承来构造自己的控制器。</p>
+</li>
+<li>
+<p>但从这个类派生自己的控制器可以获得一些便利性。</p>
+</li>
+</ul>
+<p>默认的以文件名为控制器名，函数名前部分的action为action，action后半部分（区分大小写）为请求action参数对应的值。</p>
+<p>比如Default.php中，控制器为Default，action为action，action的值为Index，以此类推</p>
+<p>看一下Model_Users即 model文件夹下的User.php文件</p>
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nt">php</span>
+<span class="o">//</span><span class="err">加载一个表数据入口类</span>
+<span class="nt">FLEA</span><span class="o">:</span><span class="nd">:loadClass</span><span class="o">(</span><span class="s1">&#39;FLEA_Db_TableDataGateway&#39;</span><span class="o">);</span>
+
+<span class="nt">class</span> <span class="nt">Model_Users</span> <span class="nt">extends</span> <span class="nt">FLEA_Db_TableDataGateway</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="err">$</span><span class="n">tableName</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="err">$</span><span class="n">primaryKey</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">?&gt;</span>
+</pre></div>
+
+
+<p>模型层里最重要的称业务对象领域对象都可以，区分角度不同而已，模型层注意是业务对象及业务对象相关的动作。大多是和数据库打交道的部分。</p>
+<p>Flea的开发和传统的orm工具（如hibernate）不一样。不用配置就可以实现一样的功能，有些像模板模式。将某些步骤推迟到算法实现的时候。定义完业务对象再回调父类中的方法来实现持久化。</p>
+<p>实现方式</p>
+<p>1)加载一个表数据入口类</p>
+<p>2)    Model_Users类继承表数据入口类，在此类中只需要定义3部分，其一是表名，其二是主键，当多个的时候原理一样，其三定义表间关系</p>
+<p>这里还只是单表操作，故暂无第三部分。</p>
+<p>既然业务对象写完了，接下来写控制器，我在Default中写的实现</p>
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="kr">class</span>  <span class="nx">Controller_Default</span> <span class="kr">extends</span> <span class="nx">FLEA_Controller_Action</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">$_modelUsers</span><span class="p">;</span>
+
+    <span class="kd">function</span> <span class="nx">Controller_Default</span><span class="p">(){</span>
+
+  <span class="c1">//构造函数</span>
+
+       <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">_modelUsers</span> <span class="o">=</span> <span class="o">&amp;</span> <span class="nx">FLEA</span><span class="o">::</span><span class="nx">getSingleton</span><span class="p">(</span><span class="s2">&quot;Model_Users&quot;</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+
+
+    <span class="kd">function</span> <span class="nx">actionIndex</span><span class="p">(){</span>
+
+
+
+<span class="c1">//查询所有的信息   </span>
+
+<span class="nx">$users</span><span class="o">=</span><span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">_modelUsers</span><span class="o">-&gt;</span><span class="nx">findAll</span><span class="p">();</span>
+
+       <span class="c1">//注意此路径 写法，用..是找不到，不知何故</span>
+
+       <span class="nx">include</span> <span class="s1">&#39;APP/View/userlist.php&#39;</span><span class="p">;</span>
+
+
+
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">actionShouye</span><span class="p">(){</span>
+
+
+
+       <span class="nx">include</span> <span class="s1">&#39;././a.php&#39;</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">actionformprocess</span><span class="p">(){</span>
+
+
+
+        <span class="nx">$data</span> <span class="o">=</span><span class="nx">array</span><span class="p">(</span>
+
+           <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span>   <span class="nx">$_POST</span><span class="cp">[</span><span class="nb">name</span><span class="cp">]</span><span class="p">,</span>
+
+           <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">$_POST</span><span class="cp">[</span><span class="nx">password</span><span class="cp">]</span><span class="p">,</span>
+
+           <span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="nx">$_POST</span><span class="cp">[</span><span class="nx">sex</span><span class="cp">]</span>
+
+        <span class="p">);</span>
+
+<span class="c1">//向db中插入数据</span>
+
+        <span class="nx">$this</span><span class="o">-&gt;</span><span class="nx">_modelUsers</span><span class="o">-&gt;</span><span class="nx">save</span><span class="p">(</span><span class="nx">$data</span><span class="p">);</span>
+
+        <span class="nx">redirect</span><span class="p">(</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;Default&#39;</span><span class="p">,</span> <span class="s1">&#39;Index&#39;</span><span class="p">));</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="o">?&gt;</span>
+</pre></div>
+
+
+<p>标注：1）获得当前对象$this-&gt;_modelUsers</p>
+<div class="highlight"><pre>    <span class="err">获得当前对象的方法或继承的方法$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">_modelUsers</span><span class="o">-&gt;</span>
+
+  <span class="mi">2</span><span class="err">）</span><span class="n">include</span> <span class="err">&#39;</span><span class="n">APP</span><span class="o">/</span><span class="n">View</span><span class="o">/</span><span class="n">userlist</span><span class="p">.</span><span class="n">php</span><span class="err">&#39;</span><span class="p">;</span> <span class="err">注意此路径</span> <span class="err">写法，用</span><span class="p">..</span><span class="err">是找不到，不知何故</span>
+
+  <span class="mi">3</span><span class="err">）</span><span class="n">url</span><span class="p">(</span><span class="err">&#39;控制器名&#39;</span><span class="p">,</span> <span class="err">&#39;动作值&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>此外上类中用到了一个视图层的文件userlist.php</p>
+<p>创建方式，先建html，然后重命名</p>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+
+
+
+<span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">1</span><span class="nt">&gt;</span>
+
+
+
+ //foreach后是冒号
+
+<span class="cp">&lt;?php foreach ($users as $user):?&gt;</span><span class="nt">&lt;tr&gt;</span>
+
+ <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?php echo $user[</span><span class="nb">id</span><span class="cp">]?&gt;</span><span class="nt">&lt;td&gt;</span>
+
+   <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?php echo $user[</span><span class="nb">name</span><span class="cp">]?&gt;</span><span class="nt">&lt;td&gt;</span>
+
+   <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?php echo $user[</span><span class="nx">password</span><span class="cp">]?&gt;</span><span class="nt">&lt;td&gt;</span>
+
+   <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?php echo $user[</span><span class="nx">sex</span><span class="cp">] ?&gt;</span><span class="nt">&lt;td&gt;</span>
+
+      <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">&lt;?php</span> <span class="na">echo</span> <span class="na">url</span><span class="err">(&#39;</span><span class="na">Default</span><span class="err">&#39;,&#39;</span><span class="na">sang</span><span class="err">&#39;)</span> <span class="err">?</span><span class="nt">&gt;</span>&gt;add<span class="nt">&lt;/a&gt;&lt;td&gt;</span>
+
+   <span class="nt">&lt;/tr&gt;</span>
+
+<span class="cp">&lt;?php endforeach; ?&gt;</span>
+
+<span class="nt">&lt;/table&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+
+<p>标注：1）foreach后是冒号</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2008/12/fleaphp/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2008/12/fleaphp/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+<p class="paginator">
+        <a href="http://i5ting.com/tag/html/page/2/">&laquo;</a>
+    Page 3 / 3
+</p>
+
+<script type="text/javascript">
+var disqus_shortname = 'i5ting';
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+    </div>
+  </section>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-46124852-1', 'zihua.li');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

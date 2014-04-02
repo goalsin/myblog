@@ -2,9 +2,9 @@
 
 function dols()
 {
-  echo 'Title: 诗歌'>$2
+  echo 'Title: '$3 >$2
   echo 'Category:'>>$2
-  echo 'Slug: poem'>>$2
+  echo 'Slug: '$4 >>$2
   echo ''>> $2
 
   for file in `ls -t $1`
@@ -27,4 +27,7 @@ function dols()
 
 INIT_PATH="./content/pages/poem"
 OUT_PATH="./content/pages/poem.md"
-dols $INIT_PATH $OUT_PATH
+TITLE='诗歌'
+SHORT_NAME='poem'
+dols $INIT_PATH $OUT_PATH $TITLE $SHORT_NAME
+dols './content/pages/thought' './content/pages/thought.md' '随想' 'thought'

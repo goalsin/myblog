@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Alfred Sang</title><link href="http://i5ting.com/" rel="alternate"></link><link href="http://i5ting.com/feeds/all.atom.xml" rel="self"></link><id>http://i5ting.com/</id><updated>2012-02-27T00:00:00+01:00</updated><entry><title>Code Sign error</title><link href="http://i5ting.com/2012/02/codesigin/" rel="alternate"></link><updated>2012-02-27T00:00:00+01:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2012-02-27:2012/02/codesigin/</id><summary type="html">&lt;p&gt;更新证书错误Code Sign error: Provisioning profile ‘XXXX'can't be found
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Alfred Sang</title><link href="http://i5ting.com/" rel="alternate"></link><link href="http://i5ting.com/feeds/all.atom.xml" rel="self"></link><id>http://i5ting.com/</id><updated>2014-04-02T00:00:00+02:00</updated><entry><title>Pelican创建markdown自动页面</title><link href="http://i5ting.com/2014/04/pelican-creator/" rel="alternate"></link><updated>2014-04-02T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2014-04-02:2014/04/pelican-creator/</id><summary type="html">&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="k"&gt;function &lt;/span&gt;dols&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Title: &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$3&lt;/span&gt; &amp;gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Category:&amp;#39;&lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Slug: &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$4&lt;/span&gt; &amp;gt;&amp;gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;$2&lt;/span&gt;
+
+  &lt;span class="k"&gt;for &lt;/span&gt;file in &lt;span class="sb"&gt;`&lt;/span&gt;ls -t &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+  &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;    if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="k"&gt;      &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;dir&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+&lt;span class="k"&gt;      &lt;/span&gt;&lt;span class="nv"&gt;date_created&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$file&lt;/span&gt;| awk -F &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+      &lt;span class="nv"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$file&lt;/span&gt;| awk -F &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;| awk -F &lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;
+&lt;span class="sb"&gt;`&lt;/span&gt;
+      &lt;span class="nv"&gt;title&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;head -1 &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt; | awk -F &lt;span class="s1"&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;* [&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$date_created&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$title&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;](&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$url&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class="nv"&gt;$2&lt;/span&gt;
+     &lt;span class="c"&gt;# echo $str&lt;/span&gt;
+     &lt;span class="c"&gt;# echo $str &amp;gt;&amp;gt; ./out&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="k"&gt;  done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;用法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;dols&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;poem&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;poem&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="err"&gt;诗歌&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;poem&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;dols&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;thought&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;thought&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="err"&gt;随想&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;thought&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="design pattern"></category><category term="php"></category><category term="singleton"></category></entry><entry><title>Code Sign error</title><link href="http://i5ting.com/2012/02/codesigin/" rel="alternate"></link><updated>2012-02-27T00:00:00+01:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2012-02-27:2012/02/codesigin/</id><summary type="html">&lt;p&gt;更新证书错误Code Sign error: Provisioning profile ‘XXXX'can't be found
 2012-02-27 17:03 (分类:默认分类)
 在Xcode中当你在更新了你得证书而再重新编译你的程序，真机调试一直会出现 Code Sign error: Provisioning profile ‘XXXX’ can't be found是不是会另你很恼火。下面说说解决方法，让你很好的解决这个问题。&lt;/p&gt;
 &lt;p&gt;1.关闭你的项目，找到项目文件XXXX.xcodeproj，在文件上点击右键，选择“显示包内容”（Show Package Contents）。会新打开一个Finder。注：其实XXXX.xcodeproj就是一个文件夹，这里新打开的一个Finder里面的三个文件就是该XXXX.xcodeproj文件夹里面的文件。 &lt;/p&gt;
@@ -219,7 +277,4 @@ mac下让终端显示颜色&lt;/p&gt;
 &lt;p&gt;alias ls="ls -G"&lt;/p&gt;
 &lt;p&gt;而linux是&lt;/p&gt;
 &lt;p&gt;alias ls="ls --color"&lt;/p&gt;
-&lt;p&gt;fuck  the  differences&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry><entry><title>mac上开启ssh服务</title><link href="http://i5ting.com/2011/09/ssh/" rel="alternate"></link><updated>2011-09-04T00:00:00+02:00</updated><author><name>Alfred Sang</name></author><id>tag:i5ting.com,2011-09-04:2011/09/ssh/</id><summary type="html">&lt;p&gt;2011-09-04 17:01 (分类:默认分类)&lt;/p&gt;
-&lt;p&gt;mac默认已经安装了openssh，所以只需要打开服务即可。&lt;/p&gt;
-&lt;p&gt;选择System prefrence -&amp;gt; sharing , 将remote connectionx 打开即可。&lt;/p&gt;
-&lt;p&gt;原来so easy&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry></feed>
+&lt;p&gt;fuck  the  differences&lt;/p&gt;</summary><category term="html"></category><category term="javascript"></category><category term="jQuery"></category><category term="plugin"></category></entry></feed>

@@ -58,6 +58,80 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2014/04/pelican-creator/">
+        <h2 class="article-title">Pelican创建markdown自动页面</h2>
+      </a>
+      <p class="article-meta" title="2014-04-02T00:00:00">02 Apr 2014</p>
+    </header>
+    <div class="typo article-body">
+      <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="k">function </span>dols<span class="o">()</span>
+<span class="o">{</span>
+  <span class="nb">echo</span> <span class="s1">&#39;Title: &#39;</span><span class="nv">$3</span> &gt;<span class="nv">$2</span>
+  <span class="nb">echo</span> <span class="s1">&#39;Category:&#39;</span>&gt;&gt;<span class="nv">$2</span>
+  <span class="nb">echo</span> <span class="s1">&#39;Slug: &#39;</span><span class="nv">$4</span> &gt;&gt;<span class="nv">$2</span>
+  <span class="nb">echo</span> <span class="s1">&#39;&#39;</span>&gt;&gt; <span class="nv">$2</span>
+
+  <span class="k">for </span>file in <span class="sb">`</span>ls -t <span class="nv">$1</span><span class="sb">`</span>
+  <span class="k">do</span>
+<span class="k">    if</span> <span class="o">[</span> -d <span class="nv">$1</span><span class="s2">&quot;/&quot;</span><span class="nv">$file</span> <span class="o">]</span>
+    <span class="k">then</span>
+<span class="k">      </span><span class="nb">echo</span> <span class="s1">&#39;dir&#39;</span>
+    <span class="k">else</span>
+<span class="k">      </span><span class="nv">date_created</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span>| awk -F <span class="s1">&#39;_&#39;</span> <span class="s1">&#39;{print $1}&#39;</span><span class="sb">`</span>
+      <span class="nv">url</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$file</span>| awk -F <span class="s1">&#39;_&#39;</span> <span class="s1">&#39;{print $2}&#39;</span>| awk -F <span class="s1">&#39;.&#39;</span> <span class="s1">&#39;{print $1}&#39;</span>
+<span class="sb">`</span>
+      <span class="nv">title</span><span class="o">=</span><span class="sb">`</span>head -1 <span class="nv">$1</span><span class="s2">&quot;/&quot;</span><span class="nv">$file</span> | awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
+      <span class="nb">echo</span> <span class="s2">&quot;* [&quot;</span><span class="nv">$date_created</span><span class="s2">&quot; &quot;</span><span class="nv">$title</span><span class="s2">&quot;](&quot;</span><span class="nv">$url</span><span class="s2">&quot;)&quot;</span> &gt;&gt; <span class="nv">$2</span>
+     <span class="c"># echo $str</span>
+     <span class="c"># echo $str &gt;&gt; ./out</span>
+    <span class="k">fi</span>
+
+<span class="k">  done</span>
+<span class="o">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>用法</p>
+<div class="highlight"><pre><span class="n">dols</span> <span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">pages</span><span class="o">/</span><span class="n">poem</span><span class="sc">&#39; &#39;</span><span class="p">.</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">pages</span><span class="o">/</span><span class="n">poem</span><span class="p">.</span><span class="n">md</span><span class="sc">&#39; &#39;</span><span class="err">诗歌</span><span class="sc">&#39; &#39;</span><span class="n">poem</span><span class="err">&#39;</span>
+<span class="n">dols</span> <span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">pages</span><span class="o">/</span><span class="n">thought</span><span class="sc">&#39; &#39;</span><span class="p">.</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">pages</span><span class="o">/</span><span class="n">thought</span><span class="p">.</span><span class="n">md</span><span class="sc">&#39; &#39;</span><span class="err">随想&#39;</span>
+<span class="err">&#39;</span><span class="n">thought</span><span class="err">&#39;</span>
+</pre></div>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/pelican-creator/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/pelican-creator/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2012/02/codesigin/">
         <h2 class="article-title">Code Sign error</h2>
       </a>
@@ -332,27 +406,6 @@ exit</p>
     <div class="read-more clearfix">
       <a class="button radius secondary small right" href="http://i5ting.com/2011/09/json-to-string/">阅读全文</a>
       <a class="button radius secondary small right" href="http://i5ting.com/2011/09/json-to-string/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/09/terminal-color/">
-        <h2 class="article-title">mac下让终端显示颜色</h2>
-      </a>
-      <p class="article-meta" title="2011-09-05T00:00:00">05 Sep 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-09-05 15:05 (分类:默认分类)
-mac下让终端显示颜色</p>
-<p>alias ls="ls -G"</p>
-<p>而linux是</p>
-<p>alias ls="ls --color"</p>
-<p>fuck  the  differences</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/terminal-color/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/terminal-color/#disqus_thread">评论</a>
     </div>
     <div class="hr"></div>
   </article>

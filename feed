@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Mon, 07 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>正确的Node.js Express app入门(翻译)</title><link>http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/</link><description>&lt;h2&gt;正确的Node.js Express app入门&lt;/h2&gt;
-&lt;p&gt;Matthew Nuzum —  June 21, 2013 — 11 Comments&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Mon, 07 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>正确的Node.js Express app入门(翻译)</title><link>http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/</link><description>&lt;p&gt;Matthew Nuzum —  June 21, 2013 — 11 Comments&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.bearfruit.org/2013/06/21/start-a-new-node-js-express-app-the-right-way/"&gt;原文地址&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Node.js是极其流行的，且毫无疑问你可以用它可以做任何你见过的不可思议的工作。由于很多新鲜东西，所以入门会比较复杂一些：Node.js是灵活，强大的工具，它可以用于构建很多不同类型的项目，从服务器端应用到网站，到工具，几乎无所不能。当然，它还只是一个迅速串红的新兴的工具，同样一件事儿可以有非常多的办法去做，很难去说会用到什么工具或者流程。&lt;/p&gt;
 &lt;p&gt;在 Node.js
@@ -43,7 +42,10 @@ needless to say, I ended up just reading a book during that flight. :-)&lt;/p&gt
 &lt;p&gt;输入&lt;code&gt;express -h&lt;/code&gt;后敲回车会看到选项列表。
 如果你只是敲了express并敲了回车，你会创建一个新的全是默认配置的项目。&lt;/p&gt;
 &lt;p&gt;我使用的命令是：&lt;/p&gt;
-&lt;p&gt;express -s -H -c less&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;express&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;less&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;在使用之前，让我来告诉ä=SuperTab('n')
    他们都是干什么的吧：&lt;/p&gt;
 &lt;ul&gt;

@@ -58,6 +58,187 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2011/07/cloud-idea/">
+        <h2 class="article-title">云计算的一点想法</h2>
+      </a>
+      <p class="article-meta" title="2011-07-11T00:00:00">11 Jul 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-07-11 09:38 (分类:默认分类)</p>
+<p>云计算4个领域：管理，虚拟化，计算，存储 </p>
+<p>其实，归结起来云计算的本质在于管理模式的变更。</p>
+<p>虚拟化，计算，存储最终的落点仍是管理，一种更为友好合理的方式，</p>
+<p>虚拟化实现了资源更为合理的使用和调配，计算能力则是结合分布式应用和nosql存储，利用map/reduce等算法简化计算及作业划分方式，存储上由传统的rdbms转化为使用于特定场景的NoSQL这样键值对方式的数据库，提高了访问速度，降低了其事务性，nosql存储为云计算中的计算能力提供了基础设施。</p>
+<p>我们要做的是一个分布式管理平台。主要用于管理：资源，虚拟化，计算(其实是作业管理或调度管理)，存储</p>
+<p>云里另一个概念即弱终端的云端。</p>
+<p>我们希望通过一个简单的页面，可以完成对云中资源的管理，而不需要ssh连接到对应主机上进行操作。</p>
+<p>1）资源管理</p>
+<p>2）作业调度</p>
+<p>3）虚拟主机建立</p>
+<p>4）远程管理</p>
+<p>我们希望做到：</p>
+<p>1）知道ip地址，可以在远程主机上建立用户</p>
+<p>2）在该用户上可以虚拟化，建立n个虚拟主机，采用拖拽方式，把虚拟主机图标拖到当前IP上，然后双击虚拟主机图标进行个性化设置。</p>
+<p>3）创建和管理作业任务，让作业任务管理到对应虚拟主机上，控制其所用资源和执行情况。主要可以完成以下3个方面</p>
+<div class="highlight"><pre> <span class="mi">3</span><span class="err">。</span><span class="mi">1</span><span class="err">）远程执行命令，主机监控等</span>
+
+ <span class="mi">3</span><span class="err">。</span><span class="mi">2</span><span class="err">）资源管理</span>
+
+ <span class="mi">3</span><span class="err">。</span><span class="mi">3</span><span class="err">）软件的安装部署</span>
+</pre></div>
+
+
+<p>任务是我们自己定义的，可以很容易的扩展，进而实现各种用途。</p>
+<p>4）收集所有元数据，以可定制报表的方式展现出来。</p>
+<p>可行性分析</p>
+<p>1、目前部署需要web可视化部署</p>
+<p>2、江苏电力有主机监控的需求，虽然他们有IBM的Trivos，但是这东西启动太慢，5分钟，所以他们需要用，但很少用，</p>
+<p>其实对于我们很容易扩展它，可远程执行命令，返回执行结果，这就是很好的监控。</p>
+<p>3、为以后的虚拟化等产品做好准备。扩展云平台各种管理都极其容易。</p>
+<p>从战略角度讲，获得［集群节点信息］就获得了云计算的制高点。</p>
+<p>无论主机，虚拟主机，作业，资源等都是可控的，上层应用的扩展价值极大。</p>
+<p>实现方式：暂分为3个阶段</p>
+<p>初步阶段：</p>
+<p>1。实现web终端，远程执行命令</p>
+<p>基本完成阶段：完成自动部署</p>
+<p>2。完成自动部署步骤：</p>
+<div class="highlight"><pre> <span class="mi">1</span><span class="err">÷上传资源，只允许上传</span><span class="n">tar</span><span class="err">文件，</span><span class="n">tar</span> <span class="n">tvf</span><span class="err">查看内容</span>
+
+ <span class="mi">2</span><span class="err">÷创建用户</span>
+
+ <span class="mi">3</span><span class="err">÷任务管理，拷贝到对应主机，解压，安装，返回日志</span>
+
+ <span class="mi">4</span><span class="err">÷远程多主机的执行顺序启动命令</span>
+
+ <span class="mi">5</span><span class="err">÷远程监控</span>
+</pre></div>
+
+
+<p>可扩展阶段：</p>
+<p>3。管理虚拟化，计算任务，存储安装与设置</p>
+<p>主要工作：</p>
+<p>主机上资源管理</p>
+<p>ant作业配置(依赖上面的资源管理)</p>
+<p>作业调度管理</p>
+<p>主机用户创建，以用户作为角色，管理作业任务</p>
+<p>1.0版本规划</p>
+<p>目标：尽快实现一个原型，提供可移植扩展的api</p>
+<p>jquery＋jsp＋servlet＋jdbc</p>
+<p>数据库：hsqldb</p>
+<p>tomcat</p>
+<p>2.0版本规划</p>
+<p>目标：产品化</p>
+<p>采用portal，和主流框架</p>
+<p>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝</p>
+<p>说明：上面的思考源于此次安装过程的再总结</p>
+<p>1安装baserpm     </p>
+<p>2安装gccinstall</p>
+<p>3安装mysql</p>
+<p>4安装datacell</p>
+<p>5安装tomcat</p>
+<p>6安装logmonitor</p>
+<p>7测试是否安装成功</p>
+<p>回顾一下整个过程</p>
+<p>项目</p>
+<p>install logmonitor project</p>
+<p>文件列表－－资源</p>
+<p>dist/:</p>
+<div class="highlight"><pre> <span class="n">doc</span>            <span class="err">使用文档</span>
+
+ <span class="n">install</span>         <span class="err">系统安装软件</span>
+
+ <span class="n">yoyosys</span>     <span class="err">友友公司软件</span>
+
+ <span class="n">README</span>   <span class="err">光盘说明文件</span>
+</pre></div>
+
+
+<p>部署项－－ant对应的target</p>
+<p>1安装baserpm</p>
+<p>2安装gccinstall</p>
+<p>3安装mysql</p>
+<p>4安装datacell</p>
+<p>5安装tomcat</p>
+<p>6安装logmonitor</p>
+<p>主机信息－－集群节点</p>
+<p>IP                    hostname          OS        版本号</p>
+<p>172.16.88.47</p>
+<p>172.16.88.48</p>
+<p>是否需要创建用户</p>
+<p>172.16.88.47－－yoyoadm/pass123!</p>
+<p>172.16.88.48－－yoyoadm/pass123!</p>
+<p>主机－部署对应关系－－scp和ssh的target配置信息</p>
+<p>【主机】         【部署项】     【用户】          【安装目录】</p>
+<p>172.16.88.47－－1baserpm－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－2gccinstall－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－4datacell－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－5tomcat－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.47－－6logmonitor－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－1baserpm－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－2gccinstall－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－3mysql－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>172.16.88.48－－4datacell－－yoyoadm－－/home/yoyoadm/yoyo</p>
+<p>【主机172.16.88.47任务】－－执行target</p>
+<p>部署项 －－1安装baserpm－－安装脚本install.sh－－记录日志baserpm.install.log－－确认是否执行成功</p>
+<p>部署项 －－2安装gccinstall－－安装脚本install.sh－－记录日志gccinstall.install.log－－确认是否执行成功</p>
+<p>部署项 －－4安装datacell－－安装脚本install.sh－－记录日志datacell.install.log－－确认是否执行成功</p>
+<p>部署项 －－5安装tomcat－－安装脚本install.sh－－记录日志tomcat.install.log－－确认是否执行成功</p>
+<p>部署项 －－6安装logmonitor－－安装脚本install.sh－－记录日志logmonitor.install.log－－确认是否执行成功</p>
+<p>【主机172.16.88.48任务】－－执行target</p>
+<p>部署项 －－1安装baserpm－－安装脚本install.sh－－记录日志baserpm.install.log－－确认是否执行成功</p>
+<p>部署项 －－2安装gccinstall－－安装脚本install.sh－－记录日志gccinstall.install.log－－确认是否执行成功</p>
+<p>部署项 －－3安装mysql－－安装脚本install.sh－－记录日志mysql.install.log－－确认是否执行成功</p>
+<p>部署项 －－4安装datacell－－安装脚本install.sh－－记录日志datacell.install.log－－确认是否执行成功</p>
+<p>【My任务】－－自定义target，负责启动停止等</p>
+<p>－【启动】</p>
+<div class="highlight"><pre>      <span class="err">启动</span><span class="n">datacell</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="p">.</span><span class="n">sh</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">run</span><span class="p">.</span><span class="n">sh</span>
+
+      <span class="err">启动</span><span class="n">mysql</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="n">service</span> <span class="n">mysqld</span> <span class="n">start</span>
+
+      <span class="err">启动</span><span class="n">tomcat</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">tomcat</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">startup</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<p>－【停止】</p>
+<div class="highlight"><pre>      <span class="err">停止</span><span class="n">datacell</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">stop</span><span class="p">.</span><span class="n">sh</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">datacell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">stop</span><span class="p">.</span><span class="n">sh</span>
+
+      <span class="err">停止</span><span class="n">mysql</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.48</span> <span class="err">：</span><span class="n">service</span> <span class="n">mysqld</span> <span class="n">stop</span>
+
+      <span class="err">停止</span><span class="n">tomcat</span>
+
+            <span class="err">－</span><span class="mf">172.16.88.47</span> <span class="err">：</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">yoyoadm</span><span class="o">/</span><span class="n">tomcat</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shutdown</span><span class="p">.</span><span class="n">sh</span>
+</pre></div>
+
+
+<p>172.16.88.47－－yoyoadm/pass123!</p>
+<p>可登录，查看，执行，创建task</p>
+<p>webShell</p>
+<p>webBrowser</p>
+<p>ftp</p>
+<p>监控问题</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/cloud-idea/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/cloud-idea/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2011/07/implement-vertical-align/">
         <h2 class="article-title">实现 vertical-align 的几种办法</h2>
       </a>
@@ -235,46 +416,6 @@
     <div class="read-more clearfix">
       <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/">阅读全文</a>
       <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2009/05/newbier/">
-        <h2 class="article-title">王哥训示</h2>
-      </a>
-      <p class="article-meta" title="2009-05-09T00:00:00">09 May 2009</p>
-    </header>
-    <div class="typo article-body">
-      <p>2009-05-09 17:11 (分类:默认分类)</p>
-<ol>
-<li>
-<p>从今天开始，每天6点前提交一份工作日志，文件名为：你的名字_日期.doc</p>
-</li>
-<li>
-<p>另外你刚提交的太随意，记住一点：你在做任何一件事情的时候，多从别人角度考虑问题，给他人以方便，从而让其它人对你产生信任。通过这段时间的观察，我认为你缺少项目开发系统的锻炼。目前中国的大学教育出来的学生大都是如此，都是基于书面教育。但如果你要做这一行，同时也想成为一个好的程序员，你就要严格要求自己。这里我给你提几点经验与你共勉：</p>
-</li>
-<li>
-<p>多沟通，沟通之前自己先把问题考虑清楚，同时在沟通过程，把问题描述清楚；</p>
-</li>
-<li>计划性，条理性，对待工作与生活都有计划性，而不是随心所欲的设计与开发；</li>
-<li>充满热情，努力工作。作为一个优秀的程序员必将是充满热情和努力工作的，要具有很强的组织性，而且做事讲究方法，他们有能力将事情结构化、简单化。在IT界大多数成功的程序员，他们的共同特征是：勤奋工作。这方面的例子我就不多举。希望你也能具备这样的精神。对于加班，我也一直反对，可是你反过来思考：你每天的工作效率，有8个小时吗？在8个小时之内，你完成了多少与工作有关的事情？由于所掌握的知识不够全面，以至于每走一步，都会遇到难题，于是上网寻找解决方法，去学习。很快一天时间过完，但是有没有想过：这样的事情，是应该你平时利用业余时间去完成的。简单来说：你选择了这一行，在最初的阶段，除了简单的吃睡之外，就是工作与学习。</li>
-<li>好的自学能力。软件这一行发展太快，大多数程序员都是靠自学成长，因此要利用业余时间多学习基础与新的知识，以帮助自己能更好的完成的工作。</li>
-<li>坚持到底，善始善终.其实软件开发是一件很辛苦的工作，所以一旦认定目标，就要朝向最终目标努力努力再努力，始终朝向最终目标。</li>
-<li>团队合作精神。项目开发过程中，多是几个成员一起共事，因此成员之间一定要友好相处，共同朝一个目标前进。大家可以针对如何更好完成工作，有不同的意见与声音，甚至是争吵，这些都是允许。但我们尊重每一个成员的人格。</li>
-</ol>
-<p>好了，我就先写这么多，原本是打算与你好好谈一谈。但是想一想，或许通过书面形式，接受的更快些。</p>
-<div class="highlight"><pre>                          <span class="err">王洪生</span> <span class="mf">2009.05.09</span>
-</pre></div>
-
-
-<p>先忙工作吧，什么时候，想找我谈，都可以谈</p>
-<p>其实，我很希望你能快速的成长起来，一方面是在帮我分担压力，让我们能快点的成功。另一方面，也是对你自己的人生负责。</p>
-<p>记住一句话：你每天所做事情(工作)，都是在为你自己的简历增加成功法码。</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2009/05/newbier/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2009/05/newbier/#disqus_thread">评论</a>
     </div>
     <div class="hr"></div>
   </article>

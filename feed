@@ -1,5 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>Pelican创建markdown自动页面</title><link>http://i5ting.com/2014/04/pelican-creator/</link><description>&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Mon, 07 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>正确的Node.js Express app入门(翻译)</title><link>http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/</link><description>&lt;h2&gt;正确的Node.js Express app入门&lt;/h2&gt;
+&lt;p&gt;Matthew Nuzum —  June 21, 2013 — 11 Comments&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.bearfruit.org/2013/06/21/start-a-new-node-js-express-app-the-right-way/"&gt;原文地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Node.js是极其流行的，且毫无疑问你可以用它可以做任何你见过的不可思议的工作。由于很多新鲜东西，所以入门会比较复杂一些：Node.js是灵活，强大的工具，它可以用于构建很多不同类型的项目，从服务器端应用到网站，到工具，几乎无所不能。当然，它还只是一个迅速串红的新兴的工具，同样一件事儿可以有非常多的办法去做，很难去说会用到什么工具或者流程。&lt;/p&gt;
+&lt;p&gt;在 Node.js
+web开发社区有一件事是确定的，有2个经常用于构建新的web应用的库，它们分别是connect
+和express。&lt;a href="http://www.senchalabs.org/connect/"&gt;Connect是底层工具&lt;/a&gt;让你可以使用http协议或者其他网络协议进行会话。
+&lt;a href="http://expressjs.com/"&gt;Express让构建好的网站更加简单&lt;/a&gt;
+，而且它是构建于Connect库之上的。&lt;/p&gt;
+&lt;p&gt;接下来我会给你们展示几个技巧，我发现的，可以帮助你们入Express的门，希望以此加快你使用Node构建web应用的速度，我也会通过这个教程作为我已发布的其他教程的入口，我不想告诉你它很难，相反我是试图帮你理解如何处理好。
+？&lt;/p&gt;
+&lt;p&gt;当我们学完，我们会有一个express应用，它有 &lt;a href="http://lesscss.org/"&gt;Less&lt;/a&gt;,
+sessions, &lt;a href="http://visionmedia.github.io/mocha/"&gt;test runner&lt;/a&gt;
+和当文件变动会
+&lt;a href="https://github.com/isaacs/node-supervisor"&gt;自动reload&lt;/a&gt;的功能.
+在此之前，&lt;a href="http://www.bearfruit.org/2013/06/19/how-to-install-node-js-successfully/"&gt;请确保你已经安装了Node.js和npm&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Update: Check out an &lt;a href="http://www.bearfruit.org/2013/08/22/a-better-template-engine-for-express-apps/"&gt;even better template option for Express
+apps&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;我们从&lt;a href="https://npmjs.org/"&gt;npm, the Node package manager
+tool&lt;/a&gt;开始。当你安装完Node.js后，你可能与此同时已经有了npm。之前曾说过Express是Node.js社区里非常稳定的，而npm是一个更加稳定的，极其少的情况下找一个项目是不依赖它的。&lt;/p&gt;
+&lt;p&gt;当你创建一个项目的时候，你会创建一个名为package.json的文件，它描述了你的项目和更多重要的易于npm安装你的项目依赖的配置。如你所料，项目使用Express会依赖Express
+npm模块。&lt;/p&gt;
+&lt;p&gt;当你通过npm安装一个库，它会安装到项目里你当前所在的目录下，一个名为node_modules的文件。如果你有2个项目，且安装同样的express的时候，这并不意味着你能在不同的项目里使用它们。每个都会独立其他项目有自己的模块。Ruby和Python社区试着放到一起，因为对于早期已存在的部分，它们不会有这样的工具，而Node社区私活从这个挑战有所借鉴，面对和在最初的计划里来避免这些。？&lt;/p&gt;
+&lt;p&gt;有一种办法来安装node模块，系统范围内，不论如何都可以使用。不使用package.json，我们会通过特殊命令行来安装。现在我们要安装express，我也用下面的命令行工具：&lt;/p&gt;
+&lt;p&gt;为了做此，必须在控制台可以访问npm，然后使用下面这个命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;npm&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;express&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果你用Mac或者Linux会得到一个权限拒绝的错误，之后需要使用&lt;code&gt;use sudo npm
+install -g
+express&lt;/code&gt;，这会提示你输入密码，继而此工具才能安装相应安装包。如果你输入了密码，当你使用-g参数的时候，你会经常不得不使用sudo的。&lt;/p&gt;
+&lt;p&gt;那么到底-g做什么呢？它会全局安装相应安装包的。如果没有使用-g，那么你会在当前所在文件夹里，你会看到新创建的名为node_modules的文件夹，它会安装在node_modules文件夹里。&lt;/p&gt;
+&lt;p&gt;I learned this the hard way when I was preparing for a flight and a few
+hours of working offline. I downloaded all the tools I thought I’d need
+but didn’t use -g. To this day I don’t know what folder I was in but
+needless to say, I ended up just reading a book during that flight. :-)&lt;/p&gt;
+&lt;p&gt;现在我们有了全局安装的express，我们可以创建一个新的项目了。在终端里创建一个文件夹，切换到此文件夹。你可以在这个文件夹里。比如：&lt;/p&gt;
+&lt;p&gt;Mac/Linux/Windows:&lt;/p&gt;
+&lt;p&gt;mkdir ExpressProject; cd ExpressProjectressProject&lt;/p&gt;
+&lt;p&gt;现在你已经在你的新文件夹里了，我们会使用express命令来把它转成一个Express项目。&lt;/p&gt;
+&lt;p&gt;输入&lt;code&gt;express -h&lt;/code&gt;后敲回车会看到选项列表。
+如果你只是敲了express并敲了回车，你会创建一个新的全是默认配置的项目。&lt;/p&gt;
+&lt;p&gt;我使用的命令是：&lt;/p&gt;
+&lt;p&gt;express -s -H -c less&lt;/p&gt;
+&lt;p&gt;在使用之前，让我来告诉ä=SuperTab('n')
+   他们都是干什么的吧：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-s&lt;/code&gt; 意思是增加sessions支持,&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-H&lt;/code&gt; 意思是使用&lt;a href="http://twitter.github.io/hogan.js/"&gt;&lt;code&gt;Hogan.js template
+  library&lt;/code&gt;&lt;/a&gt;, 此库依赖于
+&lt;a href="http://mustache.github.io/mustache.5.html"&gt;&lt;code&gt;Mustache&lt;/code&gt;&lt;/a&gt;,&lt;/li&gt;
+&lt;li&gt;-c less 意思是使用Less，这个css preprocessor（预处理器）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个非常流行的-H配置项是使用&lt;a href="http://jade-lang.com/"&gt;&lt;code&gt;Jade&lt;/code&gt;&lt;/a&gt;，它是默认项。所以如果你没有设置&lt;code&gt;-H&lt;/code&gt;
+或 &lt;code&gt;-e&lt;/code&gt; (&lt;a href="https://github.com/visionmedia/ejs"&gt;&lt;code&gt;ejs&lt;/code&gt;&lt;/a&gt;) 或 &lt;code&gt;-J&lt;/code&gt;
+(&lt;a href="http://james.padolsey.com/javascript/introducing-jshtml/"&gt;&lt;code&gt;JSHtml&lt;/code&gt;&lt;/a&gt;)
+你就会默认使用Jade的。本教程里我将在我的网站上使用Hogan.js。&lt;/p&gt;
+&lt;p&gt;如果你喜欢CSS，但是希望它可以有点更强大，此时Less无疑是一个非常好的选择。如果仅仅是写普通的CSS，你只需要给它一个&lt;code&gt;.less&lt;/code&gt;扩展名，这个应用会自动为你把它转成CSS的。&lt;/p&gt;
+&lt;p&gt;如果你不喜欢CSS，希望你的样式看起来有点想Python或者Ruby，你可能更喜欢
+&lt;code&gt;-c stylus&lt;/code&gt;选项来增加 Stylus
+support//learnboost.github.io/stylus/”&amp;gt;Stylus
+support.本教程所做的网站会使用Less或者普通的CSS。&lt;/p&gt;
+&lt;p&gt;如果你所在的当前目录不为空，此时使用express命令会引起错误的。它会询问你想如何处理，他还重写相同的所有文件的。遇到此种情况的时候你可以输入“yes”
+or “no”&lt;/p&gt;
+&lt;p&gt;至此我们已经有一个express基础应用了，我们需要去安装它的依赖库。输入&lt;code&gt;npm
+install&lt;/code&gt;
+，并查看屏幕滚动，模块会被下载和安装。你会看到警告，可以无视。如果你看到错误，npm会停止的。&lt;/p&gt;
+&lt;p&gt;现在我们可以运行我们的测试应用，并保证它是正常可用的。输入 &lt;code&gt;npm start&lt;/code&gt;
+开始。&lt;/p&gt;
+&lt;p&gt;如果你用的是Windows，你可能会看到防火墙警告信息如下：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.bearfruit.org/files/2013/06/e5b12b50-538a-47bf-9cf7-11d7a7ae5ab3.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我建议把第一个选项选中，并点击“Allow
+access”。如果不这样做的话，你无法在本地简化开发的。如果你经常在咖啡厅或者机场或者其他工作场所，或者可能使用移动设备上测试，此时的网络场景下，你需要保证第二个选项也选中。&lt;/p&gt;
+&lt;p&gt;无论你用什么样的操作系统，之后你都会看到一条消息，Express会监听3000端口。访问
+&lt;a href="http://localhost:3000/"&gt;http://localhost:3000/&lt;/a&gt;就可以看到你的应用了。需要说明的是Internet
+Explorer
+下你必须在最开始的地方输入&lt;code&gt;http://&lt;/code&gt;。如果你使用IE浏览器，你也可能看到下面这个弹出框：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.bearfruit.org/files/2013/06/4daae001-35d3-4243-bf36-dcab0306fa5a.png" /&gt;&lt;/p&gt;
+&lt;p&gt;我会选 “Yes” ，因为我想有更多访问。我相信自己本地跑的代码。&lt;/p&gt;
+&lt;p&gt;现在你会看到基本上空的web页面上写着“Express, Welcome to Express”&lt;/p&gt;
+&lt;p&gt;现在，我们开始定制吧。别怕，很简单的！&lt;/p&gt;
+&lt;p&gt;回到终端里，按下 &lt;code&gt;ctrl+C&lt;/code&gt;
+来终止Node.js服务器。现在，使用一个代码编辑器如Sublime Text, Notepad++,
+gEdit or Text
+Wrangler等任意一个，打开package.json。如扩展名所示，这是一个Json文档。他看起来像Javascript。注意下面这段是控制依赖的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;dependencies&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;express&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;3.2.6&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;hjs&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;less-middleware&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们需要做的是在此处增加一些东西来让我们的app更好。尤其是我们要增加代码测试运行器和当文件变动后自动重载app的功能。&lt;/p&gt;
+&lt;p&gt;我们会在express之前增加如下行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;mocha&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;chai&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;sinon&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;supervisor&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;结果如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="s"&gt;&amp;quot;dependencies&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;mocha&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;chai&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;sinon&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;supervisor&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;express&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;3.x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;hjs&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;less-middleware&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;
+ &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;请注意每一个都必须以逗号结束，最后一行除外。一旦你这做了，保存变更，并退出编辑器。&lt;/p&gt;
+&lt;p&gt;返回到你的终端，使用&lt;code&gt;npm
+install&lt;/code&gt;来安装新的依赖。等待所有新的依赖加载完成。&lt;/p&gt;
+&lt;p&gt;我们要安装是supervisor，它是Node.js启动检查文件变动的，当他们变动了，它就会自动重载本地服务器。当你经常变动和预览结果的时候，这是非常有用的。然后如果你工作在一个需要在内存里存储信息的应用的时候，当你需要重启应用的时候，一定要注意，它也是会刷新内存的。&lt;/p&gt;
+&lt;p&gt;我们已经安装了Mocha test runner,  &lt;a href="http://chaijs.com/"&gt;chai assertion
+library&lt;/a&gt; 和 the &lt;a href="http://sinonjs.org/"&gt;sinon mocking/stubbing
+library&lt;/a&gt;。它们都是帮助你测试代码的。&lt;/p&gt;
+&lt;p&gt;让我们来测试一下新功能吧。从supervisor开始。&lt;/p&gt;
+&lt;p&gt;Mac/Linux: &lt;code&gt;./node_modules/.bin/supervisor app.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Windows: &lt;code&gt;node_modules\.bin\supervisor app.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;你会再次看到的你的“Express server listening on port
+3000″。在浏览器里确保它是正常运行的。&lt;/p&gt;
+&lt;p&gt;假设正常运行，让我们把它当成默认的，再次编辑你的package.json文件，注意“scripts”
+部分。此时改为如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node app.js&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;之前用的命令放到引号中。注意windows用户要增加额外的&lt;code&gt;\&lt;/code&gt;。你最终的结果应如下：&lt;/p&gt;
+&lt;p&gt;Mac/Linux:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;./node_modules/.bin/supervisor app.js&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Windows: (note the double \)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node_modules&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;.bin&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;supervisor app.js&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在保存并退出，返回到终端里，输入&lt;code&gt;npm start&lt;/code&gt;来启动你的应用。&lt;/p&gt;
+&lt;p&gt;棒极了，让我们来做些测试吧。创建一个名为test的文件夹，并创建一个名为test.js的新文件。在你的代码编辑器里编辑此文件，增加如下代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;assert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;chai&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;routes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;../routes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="nx"&gt;suite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Routes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+     &lt;span class="nx"&gt;test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index route is defined&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+          &lt;span class="nx"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;isDefined&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;index&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+     &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在可以保存和关闭文件了。通过运行如下命令来测试：&lt;/p&gt;
+&lt;p&gt;Mac/Linux: &lt;code&gt;./node_modules/.bin/mocha -u tdd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Windows: &lt;code&gt;node_modules\.bin\mocha -u tdd&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;你会看到一行绿色消息说1个通过&lt;/p&gt;
+&lt;p&gt;我们来让生活更精简一点，编辑你的package.json文件，找到“start”行并复制它。保证第一行后面有逗号哦。修改第二个配置项，从
+“start” 改为
+“test”，之后使用此命令来覆盖引号里的命令。你应该和下面一模一样才对：&lt;/p&gt;
+&lt;p&gt;Mac/Linux:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;./node_modules/.bin/supervisor app.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;test&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;./node_modules/.bin/mocha -u tdd&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Windows: (note the double \)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node_modules&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;.bin&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;supervisor app.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;test&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node_modules&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;.bin&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;mocha -u tdd&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在保存并退出，让我们来使用&lt;code&gt;npm
+test&lt;/code&gt;来测试吧.你会得到和之前测试一样的结果。&lt;/p&gt;
+&lt;p&gt;我们做的是创建一个test目录，并在它里面创建一个带有单一测试套件的测试文件，并且在此套件里有一个测试。&lt;/p&gt;
+&lt;p&gt;如果你喜欢的话，你可以在“watch”支持的尾部增加&lt;code&gt;-w&lt;/code&gt;。这会导致它每一次文件变动都重跑一次测试。&lt;/p&gt;
+&lt;p&gt;简单说明一下，chai库支持3种不同的assertion框架。我更喜欢&lt;a href="http://chaijs.com/api/assert/"&gt;jUnit style TDD
+assertions&lt;/a&gt;。一些人更喜欢BDD样式的assertions，而其他人喜欢expect样式的。自己选择吧。&lt;/p&gt;
+&lt;p&gt;至此，已经没有什么可以阻挡你了。你可以编辑routes/index.js文件来给你的主页增加一些默认行为，或放置public/目录下的静态文件可直接使用。例如，你可以创建一个新的html文件保存为public/new.html，之后访问http://localhost:3000/new.html瞧瞧看吧。&lt;/p&gt;
+&lt;p&gt;不要忘记了你的测试。你可以给已有测试套件增加更多测试或创建一个附加测试套件的新文件。&lt;/p&gt;
+&lt;p&gt;更新说明：在你学习更加深入之前，请查阅&lt;a href="http://www.bearfruit.org/2013/08/22/a-better-template-engine-for-express-apps/"&gt;even better template option for
+Express
+apps&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;为了便于参考，下面是我的最终版本的package.json文件。这是Windows下的例子哦：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;application-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;version&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;0.0.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;private&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;scripts&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;start&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node_modules&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;.bin&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;supervisor app.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;test&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;node_modules&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;.bin&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;mocha -u tdd&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;dependencies&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;mocha&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;chai&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;sinon&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;supervisor&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;express&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;3.x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;hjs&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;less-middleware&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Matthew Nuzum&lt;/h2&gt;
+&lt;p&gt;Web guy, big thinker, loves to talk and write. Front end web, mobile and
+UX developer for John Deere ISG. My projects: @dsmwebgeeks @tekrs
+@squaretap ✝&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Mon, 07 Apr 2014 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2014-04-07:2014/04/start-a-new-nodejs-the-right-way/</guid><category>design pattern</category><category>php</category><category>singleton</category></item><item><title>Pelican创建markdown自动页面</title><link>http://i5ting.com/2014/04/pelican-creator/</link><description>&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
  3
  4
@@ -272,9 +495,4 @@ exit&lt;/p&gt;
     return '{' + arr.join(',') + '}';&lt;br /&gt;
 }  &lt;/p&gt;
 &lt;p&gt;我反正用的很爽，哈哈&lt;/p&gt;
-&lt;p&gt;另外: 如果不想json中的数字也被字符串化. 可以改造: return /^(string|number)$/.test(typeof s) ? '"' + s + '"' : s; 为 : return /^(string)$/.test(typeof s) ? '"' + s + '"' : s; (其实就是把number类型的忽略掉而已)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Mon, 05 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-05:2011/09/json-to-string/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item><item><title>mac下让终端显示颜色</title><link>http://i5ting.com/2011/09/terminal-color/</link><description>&lt;p&gt;2011-09-05 15:05 (分类:默认分类)
-mac下让终端显示颜色&lt;/p&gt;
-&lt;p&gt;alias ls="ls -G"&lt;/p&gt;
-&lt;p&gt;而linux是&lt;/p&gt;
-&lt;p&gt;alias ls="ls --color"&lt;/p&gt;
-&lt;p&gt;fuck  the  differences&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Mon, 05 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-05:2011/09/terminal-color/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item></channel></rss>
+&lt;p&gt;另外: 如果不想json中的数字也被字符串化. 可以改造: return /^(string|number)$/.test(typeof s) ? '"' + s + '"' : s; 为 : return /^(string)$/.test(typeof s) ? '"' + s + '"' : s; (其实就是把number类型的忽略掉而已)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Mon, 05 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-05:2011/09/json-to-string/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item></channel></rss>

@@ -58,6 +58,32 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2014/04/im_arch/">
+        <h2 class="article-title">IM架构设计</h2>
+      </a>
+      <p class="article-meta" title="2014-04-18T00:00:00">18 Apr 2014</p>
+    </header>
+    <div class="typo article-body">
+      <h2>im架构</h2>
+<ul>
+<li>redis做pub/sub，另外存取联系人，群组等关系</li>
+<li>mqtt做通信协议，好处是省流量，比xmpp省非常多</li>
+<li>语音：只是文件存储而已</li>
+<li>视频：网络以及编解码</li>
+</ul>
+<p>redis支持5种数据结构，足以满足各种需求了
+redis的lua支持，非常适合处理负责逻辑和数据分析，另外expire这个特点做etl也很不错
+另外redis的主从复制和读写分离都不错，3.0会出cluster，更加省事</p>
+<p>另外推荐http://msgpack.org</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/">
         <h2 class="article-title">正确的Node.js Express app入门(翻译)</h2>
       </a>
@@ -428,33 +454,9 @@ UX developer for John Deere ISG. My projects: @dsmwebgeeks @tekrs
     </div>
     <div class="hr"></div>
   </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2009/04/why-dev-slow/">
-        <h2 class="article-title">为什么开发慢？</h2>
-      </a>
-      <p class="article-meta" title="2009-04-22T00:00:00">22 Apr 2009</p>
-    </header>
-    <div class="typo article-body">
-      <p>2009-04-22 09:34 (分类:默认分类)</p>
-<p>为什么开发慢？</p>
-<p>1，自身能力有限，处理细节时浪费时间</p>
-<p>2，自己对项目理解不足，导致返工多次</p>
-<p>3，javabean+servlet+jsp开发效率实在不咋样</p>
-<p>要处理表单和javabean的关系                        --------已写完</p>
-<p>要处理数据库表和javabean的关系</p>
-<p>我终于理解了框架为什么会存在，它所要解决的问题</p>
-<p>4，项目中没有使用新技术</p>
-<p>Ajax是用了一些，目的是提高系统与用户的交互性，费时</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2009/04/why-dev-slow/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2009/04/why-dev-slow/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
 <p class="paginator">
-    Page 1 / 1
+    Page 1 / 2
+        <a href="http://i5ting.com/tag/singleton/page/2/">&raquo;</a>
 </p>
 
 <script type="text/javascript">

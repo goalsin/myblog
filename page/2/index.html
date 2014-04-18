@@ -58,6 +58,39 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2011/09/lion/">
+        <h2 class="article-title">lion安装小记</h2>
+      </a>
+      <p class="article-meta" title="2011-09-13T00:00:00">13 Sep 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-09-13 09:35 (分类:默认分类)</p>
+<p>lion安装小记</p>
+<p>1、下载lion镜像</p>
+<p>http://www.codeios.com/thread-1547-1-1.html</p>
+<p>注：我有镜像，需要的可以找我来拷贝（嘻嘻，不知道咋放到公司服务器上，有需要的自己来吧）</p>
+<p>直接点击，重启自动安装就可以（大约31分钟左右）</p>
+<p>问题是能进入登陆界面但不能登录，大概是10。7不能读10.6用户的数据库</p>
+<p>2、重建帐户</p>
+<p>重启开机command+s,打</p>
+<p>mount -uaw
+rm /var/db/.AppleSetupDone
+exit</p>
+<p>重启之后会提示你重新建立帐户, 创建完成后即可进入系统</p>
+<p>ok，可以登录</p>
+<p>存在的问题是已有用户丢失，原目录下文件如何处理</p>
+<p>解决此问题只需在account里（如果熟悉命令用useradd也可以）新建一个一样名称的帐户即可，目录默认和用户名相同。</p>
+<p>目前使用无问题，很好用</p>
+<p>具体lion特性，请看http://tech.163.com/digi/11/0720/20/79ECM0HG0016192R.html</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/lion/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/lion/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2011/09/json-to-string/">
         <h2 class="article-title">非常好用的JsonToString方法</h2>
       </a>
@@ -159,25 +192,6 @@ mac下让终端显示颜色</p>
     <div class="read-more clearfix">
       <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/">阅读全文</a>
       <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/07/jquery-load/">
-        <h2 class="article-title">Jquery的load()在Safari或IE8中不能执行脚本的解决方案</h2>
-      </a>
-      <p class="article-meta" title="2011-07-14T00:00:00">14 Jul 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-07-14 19:01 (分类:默认分类)</p>
-<p>Jquery的load()在Safari或IE8中不能执行脚本的解决方案</p>
-<p>恨人，竟然真的遇到了</p>
-<p>http://www.cnblogs.com/techmango/archive/2011/05/19/Jquery_load_cannot_execute_javasscript_in_Safari_IE.html</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/#disqus_thread">评论</a>
     </div>
     <div class="hr"></div>
   </article>

@@ -58,6 +58,32 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2014/04/im_arch/">
+        <h2 class="article-title">IM架构设计</h2>
+      </a>
+      <p class="article-meta" title="2014-04-18T00:00:00">18 Apr 2014</p>
+    </header>
+    <div class="typo article-body">
+      <h2>im架构</h2>
+<ul>
+<li>redis做pub/sub，另外存取联系人，群组等关系</li>
+<li>mqtt做通信协议，好处是省流量，比xmpp省非常多</li>
+<li>语音：只是文件存储而已</li>
+<li>视频：网络以及编解码</li>
+</ul>
+<p>redis支持5种数据结构，足以满足各种需求了
+redis的lua支持，非常适合处理负责逻辑和数据分析，另外expire这个特点做etl也很不错
+另外redis的主从复制和读写分离都不错，3.0会出cluster，更加省事</p>
+<p>另外推荐http://msgpack.org</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/">
         <h2 class="article-title">正确的Node.js Express app入门(翻译)</h2>
       </a>
@@ -583,39 +609,6 @@ that.currentXPage=Math.abs(Math.floor(that.x/that.wrapper.offsetWidth))+1;</p>
     <div class="read-more clearfix">
       <a class="button radius secondary small right" href="http://i5ting.com/2011/09/iscroll/">阅读全文</a>
       <a class="button radius secondary small right" href="http://i5ting.com/2011/09/iscroll/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/09/lion/">
-        <h2 class="article-title">lion安装小记</h2>
-      </a>
-      <p class="article-meta" title="2011-09-13T00:00:00">13 Sep 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-09-13 09:35 (分类:默认分类)</p>
-<p>lion安装小记</p>
-<p>1、下载lion镜像</p>
-<p>http://www.codeios.com/thread-1547-1-1.html</p>
-<p>注：我有镜像，需要的可以找我来拷贝（嘻嘻，不知道咋放到公司服务器上，有需要的自己来吧）</p>
-<p>直接点击，重启自动安装就可以（大约31分钟左右）</p>
-<p>问题是能进入登陆界面但不能登录，大概是10。7不能读10.6用户的数据库</p>
-<p>2、重建帐户</p>
-<p>重启开机command+s,打</p>
-<p>mount -uaw
-rm /var/db/.AppleSetupDone
-exit</p>
-<p>重启之后会提示你重新建立帐户, 创建完成后即可进入系统</p>
-<p>ok，可以登录</p>
-<p>存在的问题是已有用户丢失，原目录下文件如何处理</p>
-<p>解决此问题只需在account里（如果熟悉命令用useradd也可以）新建一个一样名称的帐户即可，目录默认和用户名相同。</p>
-<p>目前使用无问题，很好用</p>
-<p>具体lion特性，请看http://tech.163.com/digi/11/0720/20/79ECM0HG0016192R.html</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/lion/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/lion/#disqus_thread">评论</a>
     </div>
     <div class="hr"></div>
   </article>

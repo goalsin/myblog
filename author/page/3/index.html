@@ -58,6 +58,25 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2011/07/jquery-load/">
+        <h2 class="article-title">Jquery的load()在Safari或IE8中不能执行脚本的解决方案</h2>
+      </a>
+      <p class="article-meta" title="2011-07-14T00:00:00">14 Jul 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-07-14 19:01 (分类:默认分类)</p>
+<p>Jquery的load()在Safari或IE8中不能执行脚本的解决方案</p>
+<p>恨人，竟然真的遇到了</p>
+<p>http://www.cnblogs.com/techmango/archive/2011/05/19/Jquery_load_cannot_execute_javasscript_in_Safari_IE.html</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/07/jquery-load/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2011/07/cloud-idea/">
         <h2 class="article-title">云计算的一点想法</h2>
       </a>
@@ -340,82 +359,6 @@
     <div class="read-more clearfix">
       <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/">阅读全文</a>
       <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/06/use-git/">
-        <h2 class="article-title">采用Git</h2>
-      </a>
-      <p class="article-meta" title="2011-06-02T00:00:00">02 Jun 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-06-02 21:32 (分类:默认分类)</p>
-<p>采用Git</p>
-<p>优点：支持分布式离线操作，而且本地分支可以作为新的仓库，特别方便，不会有一台机器down了需要重建仓库的问题</p>
-<p>首先安装Git，源码安装，特简单，略</p>
-<p>然后，启动服务共享库</p>
-<div class="highlight"><pre> <span class="n">git</span> <span class="n">daemon</span> <span class="o">--</span><span class="n">reuseaddr</span> <span class="o">--</span><span class="n">base</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span> <span class="o">--</span><span class="n">export</span><span class="o">-</span><span class="n">all</span> <span class="o">--</span><span class="n">verbose</span> <span class="o">--</span><span class="n">enable</span><span class="o">=</span><span class="n">receive</span><span class="o">-</span><span class="n">pack</span> <span class="o">&amp;</span>
-
- <span class="err">在</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span><span class="err">下新建</span><span class="n">tiger_common</span><span class="err">文件夹</span>
-</pre></div>
-
-
-<p>cd /usr/git/tiger_common</p>
-<p>git --bare init  #不要直接用git init，这样有问题</p>
-<p>echo 'test'&gt;test.txt</p>
-<p>git add test.txt</p>
-<p>git commit -a -m 'init here '</p>
-<p>在154上</p>
-<p>git clone git://172.16.205.153/tiger_common</p>
-<p>这时就可以随意修改代码了</p>
-<p>echo 'test'&gt;test.txt</p>
-<p>git add test.txt</p>
-<p>git commit -a -m '154 test '</p>
-<p>这里的push是提交</p>
-<p>git push origin master</p>
-<p>其他机器上是pull更新</p>
-<p>git pull  origin master</p>
-<p>如此便可以完成版本控制</p>
-<p>主版本位于153</p>
-<p>其他的机器151－－－156</p>
-<p>每一个都以crontab进行调度</p>
-<p>写一个updataGit.sh</p>
-<div class="highlight"><pre> <span class="n">cd</span> <span class="p">.</span><span class="o">/</span><span class="n">tiger_common</span>
-
- <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
-</pre></div>
-
-
-<p>配置crontab为每晚11点更新。</p>
-<p>0 23 * * * sh /usr/git/updateGit.sh</p>
-<p>如此完成同步</p>
-<p>未完成功能：</p>
-<div class="highlight"><pre> <span class="mi">1</span><span class="err">、权限验证部分</span>
-</pre></div>
-
-
-<p>确认cron日志</p>
-<div class="highlight"><pre> <span class="n">Jun</span>  <span class="mi">1</span> <span class="mi">23</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">01</span> <span class="n">localhost</span> <span class="n">crond</span><span class="p">[</span><span class="mi">21638</span><span class="p">]</span><span class="o">:</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="n">CMD</span> <span class="p">(</span><span class="n">sh</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">updateGit</span><span class="p">.</span><span class="n">sh</span> <span class="p">)</span>
-
- <span class="err">确实已经执行了</span>
-</pre></div>
-
-
-<p>测试效率</p>
-<p>[root@151 a]# git clone git://172.16.205.153/tiger_common</p>
-<p>Cloning into tiger_common...</p>
-<p>remote: Counting objects: 1069, done.</p>
-<p>remote: Compressing objects: 100% (684/684), done.</p>
-<p>remote: Total 1069 (delta 344), reused 1060 (delta 344)</p>
-<p>Receiving objects: 100% (1069/1069), 531.52 MiB | 57.03 MiB/s, done.</p>
-<p>Resolving deltas: 100% (344/344), done.</p>
-<p>一共是531.52 MiB |每秒传输速度是 57.03 MiB/s</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/use-git/#disqus_thread">评论</a>
     </div>
     <div class="hr"></div>
   </article>

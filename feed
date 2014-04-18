@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Mon, 07 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>正确的Node.js Express app入门(翻译)</title><link>http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/</link><description>&lt;p&gt;Matthew Nuzum —  June 21, 2013 — 11 Comments&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alfred Sang</title><link>http://i5ting.com/</link><description>Manager、全栈工程师（Web, iOS）&lt;br&gt;80 后，桑世龙</description><atom:link href="http://i5ting.com/feed" rel="self"></atom:link><lastBuildDate>Fri, 18 Apr 2014 00:00:00 +0200</lastBuildDate><item><title>IM架构设计</title><link>http://i5ting.com/2014/04/im_arch/</link><description>&lt;h2&gt;im架构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;redis做pub/sub，另外存取联系人，群组等关系&lt;/li&gt;
+&lt;li&gt;mqtt做通信协议，好处是省流量，比xmpp省非常多&lt;/li&gt;
+&lt;li&gt;语音：只是文件存储而已&lt;/li&gt;
+&lt;li&gt;视频：网络以及编解码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;redis支持5种数据结构，足以满足各种需求了
+redis的lua支持，非常适合处理负责逻辑和数据分析，另外expire这个特点做etl也很不错
+另外redis的主从复制和读写分离都不错，3.0会出cluster，更加省事&lt;/p&gt;
+&lt;p&gt;另外推荐http://msgpack.org&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Fri, 18 Apr 2014 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2014-04-18:2014/04/im_arch/</guid><category>design pattern</category><category>php</category><category>singleton</category></item><item><title>正确的Node.js Express app入门(翻译)</title><link>http://i5ting.com/2014/04/start-a-new-nodejs-the-right-way/</link><description>&lt;p&gt;Matthew Nuzum —  June 21, 2013 — 11 Comments&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.bearfruit.org/2013/06/21/start-a-new-node-js-express-app-the-right-way/"&gt;原文地址&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Node.js是极其流行的，且毫无疑问你可以用它可以做任何你见过的不可思议的工作。由于很多新鲜东西，所以入门会比较复杂一些：Node.js是灵活，强大的工具，它可以用于构建很多不同类型的项目，从服务器端应用到网站，到工具，几乎无所不能。当然，它还只是一个迅速串红的新兴的工具，同样一件事儿可以有非常多的办法去做，很难去说会用到什么工具或者流程。&lt;/p&gt;
 &lt;p&gt;在 Node.js
@@ -482,19 +492,4 @@ exit&lt;/p&gt;
 &lt;p&gt;存在的问题是已有用户丢失，原目录下文件如何处理&lt;/p&gt;
 &lt;p&gt;解决此问题只需在account里（如果熟悉命令用useradd也可以）新建一个一样名称的帐户即可，目录默认和用户名相同。&lt;/p&gt;
 &lt;p&gt;目前使用无问题，很好用&lt;/p&gt;
-&lt;p&gt;具体lion特性，请看http://tech.163.com/digi/11/0720/20/79ECM0HG0016192R.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Tue, 13 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-13:2011/09/lion/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item><item><title>非常好用的JsonToString方法</title><link>http://i5ting.com/2011/09/json-to-string/</link><description>&lt;p&gt;2011-09-05 13:12 (分类:默认分类)&lt;/p&gt;
-&lt;p&gt;非常好用的JsonToString方法&lt;/p&gt;
-&lt;p&gt;//'&lt;/p&gt;
-&lt;p&gt;Jsontostring代码 &lt;/p&gt;
-&lt;p&gt;function JsonToString(o) {   &lt;br /&gt;
-    var arr = [];&lt;br /&gt;
-    var fmt = function(s) {&lt;br /&gt;
-        if (typeof s == 'object' &amp;amp;&amp;amp; s != null) return JsonToStr(s);&lt;br /&gt;
-        return /^(string|number)$/.test(typeof s) ? "'" + s + "'" : s;&lt;br /&gt;
-    }&lt;br /&gt;
-    for (var i in o)&lt;br /&gt;
-         arr.push("'" + i + "':" + fmt(o[i]));&lt;br /&gt;
-    return '{' + arr.join(',') + '}';&lt;br /&gt;
-}  &lt;/p&gt;
-&lt;p&gt;我反正用的很爽，哈哈&lt;/p&gt;
-&lt;p&gt;另外: 如果不想json中的数字也被字符串化. 可以改造: return /^(string|number)$/.test(typeof s) ? '"' + s + '"' : s; 为 : return /^(string)$/.test(typeof s) ? '"' + s + '"' : s; (其实就是把number类型的忽略掉而已)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Mon, 05 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-05:2011/09/json-to-string/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item></channel></rss>
+&lt;p&gt;具体lion特性，请看http://tech.163.com/digi/11/0720/20/79ECM0HG0016192R.html&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alfred Sang</dc:creator><pubDate>Tue, 13 Sep 2011 00:00:00 +0200</pubDate><guid>tag:i5ting.com,2011-09-13:2011/09/lion/</guid><category>html</category><category>javascript</category><category>jQuery</category><category>plugin</category></item></channel></rss>

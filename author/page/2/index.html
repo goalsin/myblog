@@ -57,6 +57,199 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2011/09/iscroll/">
+        <h2 class="article-title">iscroll－V3.7.2发布</h2>
+      </a>
+      <p class="article-meta" title="2011-09-23T00:00:00">23 Sep 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-09-23 09:20 (分类:默认分类)</p>
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* </span>
+<span class="cm">* Find more about the scrolling function at</span>
+<span class="cm">* http://cubiq.org/iscroll</span>
+<span class="cm">*</span>
+<span class="cm">* Copyright (c) 2010 Matteo Spinelli, http://cubiq.org/</span>
+<span class="cm">* Released under MIT license</span>
+<span class="cm">* http://cubiq.org/dropbox/mit-license.txt</span>
+<span class="cm">* </span>
+<span class="cm">* Version 3.7.1 - Last updated: 2010.10.08</span>
+<span class="cm">* </span>
+<span class="cm">*/</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">* iScroll3是（../jslib/iscroll3.7.1.js）版本的改造，把iScroll类名改为iScroll3</span>
+<span class="cm">* </span>
+<span class="cm">* i3 vs i4 difference:</span>
+<span class="cm">* 1. i3没有放大（zoom）事件，所以嵌入内部不会产生事件冒泡问题</span>
+<span class="cm">* 2. i3和i4完全不一样的api,i4功能更强健一些</span>
+<span class="cm">*</span>
+<span class="cm">* @modified by alfred.sang@androtimes.com</span>
+<span class="cm">*</span>
+<span class="cm">* 增加2个全局变量</span>
+<span class="cm">*   1）  currentXPage:1,</span>
+<span class="cm">*   2）  _isPageFliped:false,//私有    </span>
+<span class="cm">*</span>
+<span class="cm">* 增加1个配置项</span>
+<span class="cm">*   1）  isFullScreen:true,</span>
+<span class="cm">*</span>
+<span class="cm">* 增加一个回调函数</span>
+<span class="cm">*   1）  onScrollXPageFliped:function(){},//翻页事件处理回调函数</span>
+<span class="cm">*</span>
+<span class="cm">*</span>
+<span class="cm">* that.wrapper.offsetWidth是父容器的宽度。计算currentXPage</span>
+<span class="cm">* </span>
+<span class="cm">* Version 3.7.2 - Last updated: 2011.9.22</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>   
+</pre></div>
+
+
+<p>2011－09－22 16：09
+修改修改currentXPage取值方式，使之更为通用
+currentXPage=Math.abs(Math.floor(that.x/that.wrapper.offsetWidth))+1;</p>
+<p>把onScrollPageFliped改成onScrollXPageFliped便于以后扩展</p>
+<p>that.wrapper.offsetWidth是一个非常有用的scroller宽度。</p>
+<p>未改动之前的iScroll3使用方式：</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">myScroll</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll3</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">snap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">momentum</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">hScrollbar</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+
+
+<p>从上面代码可以看出，iScroll3的原型里只有一个回调方法onScrollEnd，这个函数只要是页内任何touch move事件都会触发，这就导致很多很多需要翻页时处理的事，在onScrollEnd发生，而且是多次，资源消耗非常严重。
+对于杂志阅读，很多是翻页才加动画效果或页面效果的，而在页内不需要任何事件。
+所以性能优化：减少onScrollEnd（）中使用任何代码</p>
+<ul>
+<li>增加1个配置项</li>
+<li>1） isFullScreen:true,</li>
+</ul>
+<p>当iScroll3嵌套的时候，只要最外层的iScroll3的 isFullScreen即可，内部均为false.所以默认值为true.</p>
+<p>下面是测试代码：</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">myScroll</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll3</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">snap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">momentum</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">hScrollbar</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+<span class="p">},</span>
+
+<span class="nx">onScrollXPageFliped</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+<span class="c1">//翻页时设置不许全屏</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">isFullScreen</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;onScrollXPageFliped&#39;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">currentXPage</span><span class="p">);</span> 
+
+<span class="p">}</span>
+
+<span class="p">});</span>
+
+
+<span class="kd">var</span> <span class="nx">myScroll</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll3</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">snap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">momentum</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">hScrollbar</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">isFullScreen</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="p">},</span>
+
+<span class="nx">onScrollXPageFliped</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;onScrollXPageFliped&#39;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">currentXPage</span><span class="p">);</span> 
+<span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+
+
+<ul>
+<li>增加一个回调函数</li>
+<li>1） onScrollXPageFliped:function(){},//翻页事件处理回调函数</li>
+</ul>
+<p>测试代码同上</p>
+<ul>
+<li>增加2个全局变量</li>
+<li>1） currentXPage:1,</li>
+<li>2） _isPageFliped:false,//私有</li>
+</ul>
+<p>全局变量使用方法：</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">myScroll</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll3</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">snap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">momentum</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">hScrollbar</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">isFullScreen</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="p">},</span>
+
+<span class="nx">onScrollXPageFliped</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="c1">//在回调方法内部，使用this对象获得全局变量</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;onScrollXPageFliped&#39;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">currentXPage</span><span class="p">);</span>
+<span class="nx">_onScrollXPageFlipedCallback</span><span class="p">();</span><span class="c1">//翻页后－回调函数</span>
+<span class="p">}</span>
+<span class="p">});</span>
+
+
+<span class="c1">//在回调方法外部，使用myScroll对象获得全局变量</span>
+<span class="kd">function</span> <span class="nx">_onScrollXPageFlipedCallback</span><span class="p">(){</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;onScrollXPageFliped&#39;</span><span class="o">+</span><span class="nx">myScroll</span><span class="p">.</span><span class="nx">currentXPage</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>源码中currentXPage取决于that.wrapper.offsetWidth
+代码如下：
+that.currentXPage=Math.abs(Math.floor(that.x/that.wrapper.offsetWidth))+1;</p>
+<p>－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<p>说明iScroll4和3的区别之一</p>
+<p>iscroll4里，是wrapper的第一个子节点。这点在使用用法上很明显</p>
+<div class="highlight"><pre><span class="n">that</span><span class="p">.</span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">typeof</span> <span class="n">el</span> <span class="o">==</span> <span class="err">&#39;</span><span class="n">object</span><span class="err">&#39;</span> <span class="o">?</span> <span class="n">el</span> <span class="o">:</span> <span class="n">doc</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">el</span><span class="p">);</span>
+<span class="n">that</span><span class="p">.</span><span class="n">scroller</span> <span class="o">=</span> <span class="n">that</span><span class="p">.</span><span class="n">wrapper</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</pre></div>
+
+
+<p>iScroll3里，是父节点</p>
+<div class="highlight"><pre><span class="n">that</span><span class="p">.</span><span class="n">element</span> <span class="o">=</span> <span class="n">typeof</span> <span class="n">el</span> <span class="o">==</span> <span class="err">&#39;</span><span class="n">object</span><span class="err">&#39;</span> <span class="o">?</span> <span class="n">el</span> <span class="o">:</span> <span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">el</span><span class="p">);</span>
+<span class="n">that</span><span class="p">.</span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">that</span><span class="p">.</span><span class="n">element</span><span class="p">.</span><span class="n">parentNode</span><span class="p">;</span>
+</pre></div>
+
+
+<p>html代码如下:</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;scroller&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">myScroll_inner_fullscreen</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll3</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">desktopCompatibility</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">});</span>
+
+
+<span class="kd">var</span> <span class="nx">myScroll_inner_fullscreen</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">iScroll4</span><span class="p">(</span><span class="s1">&#39;wapper&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">desktopCompatibility</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="nx">onScrollEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">scrollTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/iscroll/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/09/iscroll/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2011/09/lion/">
         <h2 class="article-title">lion安装小记</h2>
       </a>
@@ -159,44 +352,9 @@ mac下让终端显示颜色</p>
     </div>
     <div class="hr"></div>
   </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/08/conclude/">
-        <h2 class="article-title">离职总结</h2>
-      </a>
-      <p class="article-meta" title="2011-08-15T00:00:00">15 Aug 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-08-15 10:11 (分类:默认分类)</p>
-<p>完成了哪些事</p>
-<p>1、自动化部署想法演进过程</p>
-<p>1)最开始每台机器登录，拷贝，编写shell脚本，烦。</p>
-<p>2)采用ssh和scp，去掉sshkey，以一主机为主，向其他机器scp安装文件，ssh远程执行命令完成启动安装，问题是去掉sshkey密码是一个苦力活，需要改进。</p>
-<p>3)采用apache Ant，利用sshexec和scp这2个task，密码可以动态传入，也可以写到配置文件中，日志答应规范，部署简洁，问题是需要依赖java和ant。</p>
-<p>4)最后马哥用c封装了ssh2，实现配置化，不依赖java即可完成安装部署。</p>
-<p>2、形成100页文档《凌云志.doc》，做了一次linux培训</p>
-<p>内容涵盖了上面说的《自动化部署想法演进过程》，BI相关部分，管理思考，linux总结，技术问题等。</p>
-<p>并于上周三8月10日下午四点做了一次linux培训。</p>
-<p>BI的部分是我之前工作想法的总结，对部门应该是有益的。马哥一直对我很好，如果要不是想自己干点事业，真想跟他混，言传身教，真是受益多多。</p>
-<p>3、搭建了一些环境，大家可以使用，尤其是BBS论坛</p>
-<p>尤其是BBS论坛，个人觉得非常重要，公司的管理方式仍是以小公司方式来，或者说比较原始，缺少沉淀，这么说其实不准确，是有沉淀，但只是在某几个人脑子里。</p>
-<p>信息不透明会是一个硬伤。</p>
-<p>http://172.16.205.119/</p>
-<p>论坛内容位置 /home/wwwroot/bbs</p>
-<p>用户名密码admin/admin</p>
-<p>另外有jira，confluence，db2，maven伺服，lnmp，rpm安装包，git等资源，详细信息见文档。</p>
-<p>附：</p>
-<p>去天津出差3天的发票一直没报，能报吗？</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
 <p class="paginator">
         <a href="http://i5ting.com/author/">&laquo;</a>
-    Page 2 / 4
+    Page 2 / 5
         <a href="http://i5ting.com/author/page/3/">&raquo;</a>
 </p>
 

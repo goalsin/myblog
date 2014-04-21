@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Alfred Sang - idea</title>
+    <title>四月游记 | Alfred Sang</title>
       <link href="http://i5ting.com/feed" type="application/rss+xml" rel="alternate" title="Alfred Sang RSS Feed" />
     <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Montserrat:700' rel='stylesheet' type='text/css'>
     <link rel='stylesheet'  href='http://i5ting.com/theme/css/normalize.css' type='text/css' media='all' />
@@ -55,15 +55,15 @@
   </section>
   <section class="l-content">
     <div class="inner">
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2014/04/april-travel/">
-        <h2 class="article-title">四月游记</h2>
-      </a>
-      <p class="article-meta" title="2014-04-21T00:00:00">21 Apr 2014</p>
-    </header>
-    <div class="typo article-body">
-      <h2>行程</h2>
+<article>
+  <header>
+    <p class="article-meta" title="2014-04-21T00:00:00">21 Apr 2014</p>
+    <h2 class="article-title"><a href="http://i5ting.com/2014/04/april-travel/" rel="bookmark"
+    title="Permalink to 四月游记">四月游记</a></h3>
+  </header>
+  <div class="typo article-body">
+    <div class='markdown-body'>
+     <h2>行程</h2>
 <ul>
 <li>4月5日，飞机到深圳，1600（住在老土家）</li>
 </ul>
@@ -153,51 +153,38 @@
 <p>看完一本redis的书，翻译了一篇node文章，写了点node express的bdd测试代码</p>
 <p>还不错</p>
     </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/april-travel/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/april-travel/#disqus_thread">评论</a>
+  </div>
+  <div class="hr"></div>
+  <section class="article-share clearfix">
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="about-blog">
+      <h4>关于此博客</h4>
+      <p>Alfred Sang的个人博客，主要关注互联网技术。</p>
+      <a href="https://twitter.com/i5ting" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @i5ting</a>
     </div>
-    <div class="hr"></div>
-  </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2014/04/im_arch/">
-        <h2 class="article-title">IM架构设计</h2>
+    <div class="share">
+      <h4>分享这篇文章</h4>
+      <a class="icon-social icon-social-twitter-bird" href="http://twitter.com/share?text=四月游记&url=http://i5ting.com/2014/04/april-travel/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
       </a>
-      <p class="article-meta" title="2014-04-18T00:00:00">18 Apr 2014</p>
-    </header>
-    <div class="typo article-body">
-      <h2>im架构</h2>
-<ul>
-<li>redis做pub/sub，另外存取联系人，群组等关系</li>
-<li>mqtt做通信协议，好处是省流量，比xmpp省非常多</li>
-<li>语音：只是文件存储而已</li>
-<li>视频：网络以及编解码</li>
-</ul>
-<p>redis支持5种数据结构，足以满足各种需求了
-redis的lua支持，非常适合处理负责逻辑和数据分析，另外expire这个特点做etl也很不错
-另外redis的主从复制和读写分离都不错，3.0会出cluster，更加省事</p>
-<p>另外推荐http://msgpack.org</p>
+      <a class="icon-social icon-social-weibo" href="http://service.weibo.com/share/share.php?title=四月游记&url=http://i5ting.com/2014/04/april-travel/" onclick="window.open(this.href, 'weibo-share', 'width=550,height=435');return false;">
+        <span class="hidden">微博</span>
+      </a>
     </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2014/04/im_arch/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
-<p class="paginator">
-    Page 1 / 1
-</p>
-
+  </section>
+  <div class="hr"></div>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
 var disqus_shortname = 'i5ting';
-(function () {
-var s = document.createElement('script'); s.async = true;
-s.type = 'text/javascript';
-s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-}());
+
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
     </div>
   </section>
   <script>

@@ -57,6 +57,41 @@
     <div class="inner">
   <article class="index-article">
     <header>
+      <a href="http://i5ting.com/2011/08/conclude/">
+        <h2 class="article-title">离职总结</h2>
+      </a>
+      <p class="article-meta" title="2011-08-15T00:00:00">15 Aug 2011</p>
+    </header>
+    <div class="typo article-body">
+      <p>2011-08-15 10:11 (分类:默认分类)</p>
+<p>完成了哪些事</p>
+<p>1、自动化部署想法演进过程</p>
+<p>1)最开始每台机器登录，拷贝，编写shell脚本，烦。</p>
+<p>2)采用ssh和scp，去掉sshkey，以一主机为主，向其他机器scp安装文件，ssh远程执行命令完成启动安装，问题是去掉sshkey密码是一个苦力活，需要改进。</p>
+<p>3)采用apache Ant，利用sshexec和scp这2个task，密码可以动态传入，也可以写到配置文件中，日志答应规范，部署简洁，问题是需要依赖java和ant。</p>
+<p>4)最后马哥用c封装了ssh2，实现配置化，不依赖java即可完成安装部署。</p>
+<p>2、形成100页文档《凌云志.doc》，做了一次linux培训</p>
+<p>内容涵盖了上面说的《自动化部署想法演进过程》，BI相关部分，管理思考，linux总结，技术问题等。</p>
+<p>并于上周三8月10日下午四点做了一次linux培训。</p>
+<p>BI的部分是我之前工作想法的总结，对部门应该是有益的。马哥一直对我很好，如果要不是想自己干点事业，真想跟他混，言传身教，真是受益多多。</p>
+<p>3、搭建了一些环境，大家可以使用，尤其是BBS论坛</p>
+<p>尤其是BBS论坛，个人觉得非常重要，公司的管理方式仍是以小公司方式来，或者说比较原始，缺少沉淀，这么说其实不准确，是有沉淀，但只是在某几个人脑子里。</p>
+<p>信息不透明会是一个硬伤。</p>
+<p>http://172.16.205.119/</p>
+<p>论坛内容位置 /home/wwwroot/bbs</p>
+<p>用户名密码admin/admin</p>
+<p>另外有jira，confluence，db2，maven伺服，lnmp，rpm安装包，git等资源，详细信息见文档。</p>
+<p>附：</p>
+<p>去天津出差3天的发票一直没报，能报吗？</p>
+    </div>
+    <div class="read-more clearfix">
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/">阅读全文</a>
+      <a class="button radius secondary small right" href="http://i5ting.com/2011/08/conclude/#disqus_thread">评论</a>
+    </div>
+    <div class="hr"></div>
+  </article>
+  <article class="index-article">
+    <header>
       <a href="http://i5ting.com/2011/07/jquery-load/">
         <h2 class="article-title">Jquery的load()在Safari或IE8中不能执行脚本的解决方案</h2>
       </a>
@@ -298,72 +333,9 @@
     </div>
     <div class="hr"></div>
   </article>
-  <article class="index-article">
-    <header>
-      <a href="http://i5ting.com/2011/06/haproxy/">
-        <h2 class="article-title">HAPROXY总结</h2>
-      </a>
-      <p class="article-meta" title="2011-06-02T00:00:00">02 Jun 2011</p>
-    </header>
-    <div class="typo article-body">
-      <p>2011-06-02 21:31 (分类:默认分类)</p>
-<p>下载源码</p>
-<p>解压，执行,其实所有细节都在README文件中</p>
-<p>uname -r   #查看内核版本</p>
-<p>此项目不是标准的autoconf配置的，所以安装方式不太一样</p>
-<p>make TARGET=linux26 PREFIX=/usr/local/haprpxy</p>
-<p>make install PREFIX=/usr/local/haproxy</p>
-<p>配置文件</p>
-<p>/usr/local/haproxy/haproxy.cfg</p>
-<p>－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
-<p>global</p>
-<p>log 127.0.0.1 local0</p>
-<p>maxconn 4096</p>
-<p>user  root</p>
-<p>group root</p>
-<p>daemon</p>
-<p>nbproc 1</p>
-<p>pidfile /usr/local/haproxy/run/haproxy.pid</p>
-<p>defaults</p>
-<h6>###日志</h6>
-<p>log   global</p>
-<p>contimeout 5000</p>
-<p>clitimeout 30000</p>
-<p>srvtimeout 30000</p>
-<p>listen admin_stats</p>
-<p>bind 0.0.0.0:1080</p>
-<p>mode http</p>
-<p>log 127.0.0.1 local0 err</p>
-<p>stats uri /admin?stats</p>
-<p>listen test 172.16.205.154:80</p>
-<div class="highlight"><pre>   <span class="n">mode</span> <span class="n">http</span>
-</pre></div>
-
-
-<p>balance source</p>
-<p>option allbackups</p>
-<p>server denlai1 172.16.205.122:8080/logmonitor  check inter 1500 rise 3 fall 3</p>
-<p>server denlai2 172.16.205.131:8080/logmonitor  check inter 1500 rise 3 fall 3</p>
-<p>－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
-<p>启动</p>
-<p>不要日志</p>
-<p>haproxy -f /usr/local/haproxy/haproxy.cfg  &amp;</p>
-<p>查看日志</p>
-<p>haproxy -f /usr/local/haproxy/haproxy.cfg -d &amp;</p>
-<p>测试</p>
-<p>访问下面地址    http://172.16.205.154/logmonitor/</p>
-<p>开机启动，参见下文</p>
-<p>http://www.miotour.com/2010/11/22/haproxy安装配置调优/</p>
-    </div>
-    <div class="read-more clearfix">
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/">阅读全文</a>
-      <a class="button radius secondary small right" href="http://i5ting.com/2011/06/haproxy/#disqus_thread">评论</a>
-    </div>
-    <div class="hr"></div>
-  </article>
 <p class="paginator">
         <a href="http://i5ting.com/author/page/2/">&laquo;</a>
-    Page 3 / 4
+    Page 3 / 5
         <a href="http://i5ting.com/author/page/4/">&raquo;</a>
 </p>
 
